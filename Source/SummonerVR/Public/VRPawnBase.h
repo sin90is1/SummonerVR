@@ -3,20 +3,25 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AbilitySystemInterface.h"
 #include "GameFramework/Pawn.h"
 #include "VRPawnBase.generated.h"
 
+
+class UAbilitySystemComponent;
+class UAttributeSet;
+
 UCLASS()
-class SUMMONERVR_API AVRPawnBase : public APawn
+class SUMMONERVR_API AVRPawnBase : public APawn, public  IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this pawn's properties
+
 	AVRPawnBase();
 
 protected:
-	// Called when the game starts or when spawned
+
 	virtual void BeginPlay() override;
 
 public:	
@@ -25,5 +30,20 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+
+	UAttributeSet* GetUAttributeSet() const { return AttributeSet; }
+
+protected:
+
+	UPROPERTY()
+	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
+
+	UPROPERTY()
+	TObjectPtr<UAttributeSet> AttributeSet;
+
+private:
+	virtual void PossessedBy(AController* NewController) override;
 
 };
