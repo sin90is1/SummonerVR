@@ -21,7 +21,9 @@ class SUMMONERVR_API UVR_AttributeSetBase : public UAttributeSet
 
 	public:
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AttributeSetCharacter")
+	UVR_AttributeSetBase();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GAS|Character")
 	FGameplayAttributeData MaxHealth;
 	ATTRIBUTE_ACCESSORS(UVR_AttributeSetBase, MaxHealth)
 

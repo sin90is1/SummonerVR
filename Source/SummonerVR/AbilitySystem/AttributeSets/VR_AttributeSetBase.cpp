@@ -4,7 +4,20 @@
 #include "AbilitySystem/AttributeSets/VR_AttributeSetBase.h"
 #include "GameplayEffectExtension.h"
 
- void UVR_AttributeSetBase::PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data)
+
+UVR_AttributeSetBase::UVR_AttributeSetBase()
+{
+	InitHealth(200.f);
+	InitMaxHealth(200.f);
+
+	InitMana(100.f);
+	InitMaxMana(100.f);
+
+	InitEnergy(100.f);
+	InitMaxEnergy(100.f);
+}
+
+void UVR_AttributeSetBase::PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data)
 {
  	Super::PostGameplayEffectExecute(Data);
 
