@@ -5,6 +5,8 @@
 
 #include "AbilitySystem/Components/VR_AbilitySystemComponentBase.h"
 #include "AbilitySystem/AttributeSets/VR_AttributeSetBase.h"
+#include "VRPlayerController.h"
+#include "UI/HUD/VRHUD.h"
 
 // Sets default values
 AVRPawnBase::AVRPawnBase()
@@ -53,6 +55,14 @@ void AVRPawnBase::PossessedBy(AController* NewController)
 	Super::PossessedBy(NewController);
 
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+
+	if (AVRPlayerController* VRPlayerController = Cast<AVRPlayerController>(GetController()))
+	{
+		if (AVRHUD* VRHUD = Cast<AVRHUD>(VRPlayerController->GetHUD()))
+		{
+			VRHUD->InitOverlay(VRPlayerController, AbilitySystemComponent, AttributeSet);
+		}
+	}
 
 	//GiveAbilities();
 	//ApplyStartupEffects();

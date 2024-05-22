@@ -3,11 +3,33 @@
 
 #include "UI/HUD/VRHUD.h"
 #include "UI/Widget/VRUserWidget.h"
+#include "UI/WidgetController/OverlayWidgetController.h"
 
-void AVRHUD::BeginPlay()
+
+UOverlayWidgetController* AVRHUD::GetOverlayWidgetController(const FWidgetControllerParams& WCParams)
 {
-	Super::BeginPlay();
+	if (OverlayWidgetController == nullptr)
+	{
+		OverlayWidgetController = NewObject<UOverlayWidgetController>(this, OverlayWidgetControllerClass);
+		OverlayWidgetController->SetWidgetControllerParams(WCParams);
+
+		return OverlayWidgetController;
+	}
+	return OverlayWidgetController;
+}
+
+void AVRHUD::InitOverlay(APlayerController* PC, UAbilitySystemComponent* ASC, UAttributeSet* AS)
+{
+	checkf(OverlayWidgetClass, TEXT("Overlay Widget Class uninitialized, please fill out BP_VRHUD"));
+	checkf(OverlayWidgetControllerClass, TEXT("Overlay Widget Controller Class uninitialized, please fill out BP_VRHUD"));
 
 	UUserWidget* Widget = CreateWidget<UUserWidget>(GetWorld(), OverlayWidgetClass);
+	OverlayWidget = Cast<UVRUserWidget>(Widget);
+
+	const FWidgetControllerParams WidgetControllerParams(PC, ASC, AS);
+	UOverlayWidgetController* WidgetController = GetOverlayWidgetController(WidgetControllerParams);
+
+	OverlayWidget->SetWidgetController(WidgetController);
+
 	Widget->AddToViewport();
 }
