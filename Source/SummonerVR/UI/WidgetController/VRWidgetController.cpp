@@ -9,3 +9,11 @@ void UVRWidgetController::SetWidgetControllerParams(const FWidgetControllerParam
 	AbilitySystemComponent = WCParams.AbilitySystemComponent;
 	AttributeSet = WCParams.AttributeSet;
 }
+
+void UVRWidgetController::BroadcastInitialValues()
+{
+}
+
+void UVRWidgetController::BindCallbacksToDependencies()
+{
+}

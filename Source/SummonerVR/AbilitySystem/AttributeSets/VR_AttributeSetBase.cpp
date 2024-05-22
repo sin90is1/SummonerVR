@@ -7,13 +7,13 @@
 
 UVR_AttributeSetBase::UVR_AttributeSetBase()
 {
-	InitHealth(200.f);
+	InitHealth(70.f);
 	InitMaxHealth(200.f);
 
-	InitMana(100.f);
+	InitMana(30.f);
 	InitMaxMana(100.f);
 
-	InitEnergy(100.f);
+	InitEnergy(50.f);
 	InitMaxEnergy(100.f);
 }
 
