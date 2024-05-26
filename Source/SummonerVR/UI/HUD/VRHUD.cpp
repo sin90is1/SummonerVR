@@ -3,7 +3,10 @@
 
 #include "UI/HUD/VRHUD.h"
 #include "UI/Widget/VRUserWidget.h"
+#include "VRPawnBase.h"
 #include "UI/WidgetController/OverlayWidgetController.h"
+
+#include "Actors/WidgetContainerActor.h"
 
 
 UOverlayWidgetController* AVRHUD::GetOverlayWidgetController(const FWidgetControllerParams& WCParams)
@@ -34,4 +37,5 @@ void AVRHUD::InitOverlay(APlayerController* PC, UAbilitySystemComponent* ASC, UA
 	WidgetController->BroadcastInitialValues();
 
 	Widget->AddToViewport();
+
 }

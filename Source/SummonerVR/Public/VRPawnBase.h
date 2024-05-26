@@ -11,6 +11,11 @@
 class UAbilitySystemComponent;
 class UAttributeSet;
 
+// 
+// //for VR HUD
+// class AWidgetContainerActor;
+//  class UVRUserWidget;
+
 UCLASS()
 class SUMMONERVR_API AVRPawnBase : public APawn, public  IAbilitySystemInterface
 {
@@ -37,7 +42,7 @@ public:
 
 protected:
 
-	UPROPERTY()
+	UPROPERTY(BlueprintReadOnly)
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 
 	UPROPERTY()
@@ -46,4 +51,8 @@ protected:
 private:
 	virtual void PossessedBy(AController* NewController) override;
 
+
+//vr
+	//UPROPERTY(EditAnywhere, Category = "Widgets")
+   // TObjectPtr<UChildActorComponent> WidgetContainerActorComponent;
 };
