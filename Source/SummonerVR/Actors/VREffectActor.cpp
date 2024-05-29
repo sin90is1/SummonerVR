@@ -38,7 +38,7 @@ void AVREffectActor::BP_ApplyEffectToTarget(AActor* Target, TSubclassOf<UGamepla
 
 	//2.any ASC can make an EffectSpect using MakeOutgoingSpec function that actually make the wrapper of EffectSpect that is effectspectHandle but this function needs 
 	//an EffectContextHandle that we make in 3.
-	const FGameplayEffectSpecHandle EffectSpecHandle = TargetASC->MakeOutgoingSpec(GameplayEffectClass, 1.f, EffectContextHandle);
+	const FGameplayEffectSpecHandle EffectSpecHandle = TargetASC->MakeOutgoingSpec(GameplayEffectClass, ActorLevel, EffectContextHandle);
 
 	//1.one way to Apply a GameplayEffect is using "ApplyGameplayEffectSpecToSelf" and it needs a const FGameplayEffectSpec
 	const FActiveGameplayEffectHandle ActiveEffectHandle = TargetASC->ApplyGameplayEffectSpecToSelf(*EffectSpecHandle.Data.Get());

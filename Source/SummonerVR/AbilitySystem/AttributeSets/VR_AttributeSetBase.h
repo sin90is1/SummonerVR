@@ -14,6 +14,40 @@
 	GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
 
 
+USTRUCT()
+struct FEffectProperties
+{
+	GENERATED_BODY()
+
+	FEffectProperties(){}
+
+	FGameplayEffectContextHandle EffectContextHandle;
+
+	UPROPERTY()
+	UAbilitySystemComponent* SourceASC = nullptr;
+
+	UPROPERTY()
+	AActor* SourceAvatarActor = nullptr;
+
+	UPROPERTY()
+	AController* SourceController = nullptr;
+
+	UPROPERTY()
+	APawn* SourcePawn = nullptr;
+
+	UPROPERTY()
+	UAbilitySystemComponent* TargetASC = nullptr;
+
+	UPROPERTY()
+	AActor* TargetAvatarActor = nullptr;
+
+	UPROPERTY()
+	AController* TargetController = nullptr;
+
+	UPROPERTY()
+	APawn* TargetPawn = nullptr;
+};
+
 UCLASS()
 class SUMMONERVR_API UVR_AttributeSetBase : public UAttributeSet
 {
@@ -22,6 +56,10 @@ class SUMMONERVR_API UVR_AttributeSetBase : public UAttributeSet
 	public:
 
 	UVR_AttributeSetBase();
+
+	//like PostAttributeChange we should do the clamping on it and not the logic but it's better to do it in PostAttributeChange
+	// but we also doing a lot of things in PostAttributeChange so we use this instead
+	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GAS|Character")
 	FGameplayAttributeData MaxHealth;
@@ -49,8 +87,13 @@ class SUMMONERVR_API UVR_AttributeSetBase : public UAttributeSet
 	ATTRIBUTE_ACCESSORS(UVR_AttributeSetBase, MaxEnergy)
 
 
+private:
+
+	void SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props) const;
+
+
 protected:
 
-virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data) override;
+	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data) override;
 
 };

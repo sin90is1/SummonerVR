@@ -27,7 +27,6 @@ enum class EEffectRemovalPolicy
 	DoNotRemove
 };
 
-
 UCLASS()
 class SUMMONERVR_API AVREffectActor : public AActor
 {
@@ -85,4 +84,7 @@ protected:
 
 
 	TMap<FActiveGameplayEffectHandle, UAbilitySystemComponent*> ActiveEffectHandles;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Applied Effects")
+	float ActorLevel = 1.f;
 };
