@@ -23,7 +23,13 @@ void AEnemyCharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	InitAbilityActorInfo();
+}
+
+void AEnemyCharacterBase::InitAbilityActorInfo()
+{
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	Cast<UVR_AbilitySystemComponentBase>(AbilitySystemComponent)->AbilityActorInfoSet();
 }
 
 // Called every frame

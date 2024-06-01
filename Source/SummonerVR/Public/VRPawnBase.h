@@ -30,11 +30,6 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
@@ -48,11 +43,6 @@ protected:
 	UPROPERTY()
 	TObjectPtr<UAttributeSet> AttributeSet;
 
-private:
-	virtual void PossessedBy(AController* NewController) override;
+	virtual void InitAbilityActorInfo();
 
-
-//vr
-	//UPROPERTY(EditAnywhere, Category = "Widgets")
-   // TObjectPtr<UChildActorComponent> WidgetContainerActorComponent;
 };

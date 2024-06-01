@@ -13,5 +13,10 @@ UCLASS()
 class SUMMONERVR_API AVRFletcherPawn : public AVRPawnBase
 {
 	GENERATED_BODY()
-	
+public:
+	AVRFletcherPawn();
+	virtual void PossessedBy(AController* NewController) override;
+
+private:
+	virtual void InitAbilityActorInfo() override;
 };
