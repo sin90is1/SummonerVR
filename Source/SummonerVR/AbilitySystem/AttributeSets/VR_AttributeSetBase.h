@@ -59,7 +59,7 @@ class SUMMONERVR_API UVR_AttributeSetBase : public UAttributeSet
 
 	//like PostAttributeChange we should do the clamping on it and not the logic but it's better to do it in PostAttributeChange
 	// but we also doing a lot of things in PostAttributeChange so we use this instead
-	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
+/*	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;*/
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GAS|Character")
 	FGameplayAttributeData MaxHealth;

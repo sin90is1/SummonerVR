@@ -25,26 +25,56 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 	const UVR_AttributeSetBase* VRAttributeSet = CastChecked<UVR_AttributeSetBase>(AttributeSet);
 
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(
-		VRAttributeSet->GetHealthAttribute()).AddUObject(this, &UOverlayWidgetController::HealthChanged);
+		VRAttributeSet->GetHealthAttribute()).AddLambda(
+			[this](const FOnAttributeChangeData& Data)
+			{
+				OnHealthChanged.Broadcast(Data.NewValue);
+			}
+	);
 
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(
-		VRAttributeSet->GetMaxHealthAttribute()).AddUObject(this, &UOverlayWidgetController::MaxHealthChanged);
+		VRAttributeSet->GetMaxHealthAttribute()).AddLambda(
+			[this](const FOnAttributeChangeData& Data)
+			{
+				OnMaxHealthChanged.Broadcast(Data.NewValue);
+			}
+	);
 
 
 
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(
-		VRAttributeSet->GetManaAttribute()).AddUObject(this, &UOverlayWidgetController::ManaChanged);
+		VRAttributeSet->GetManaAttribute()).AddLambda(
+			[this](const FOnAttributeChangeData& Data)
+			{
+				OnManaChanged.Broadcast(Data.NewValue);
+			}
+	);
 
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(
-		VRAttributeSet->GetMaxManaAttribute()).AddUObject(this, &UOverlayWidgetController::MaxManaChanged);
+		VRAttributeSet->GetMaxManaAttribute()).AddLambda(
+			[this](const FOnAttributeChangeData& Data)
+			{
+				OnMaxManaChanged.Broadcast(Data.NewValue);
+			}
+	);
 
 
 
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(
-		VRAttributeSet->GetEnergyAttribute()).AddUObject(this, &UOverlayWidgetController::EnergyChanged);
+		VRAttributeSet->GetEnergyAttribute()).AddLambda(
+			[this](const FOnAttributeChangeData& Data)
+			{
+				OnEnergyChanged.Broadcast(Data.NewValue);
+			}
+	);
 
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(
-		VRAttributeSet->GetMaxEnergyAttribute()).AddUObject(this, &UOverlayWidgetController::MaxEnergyChanged);
+		VRAttributeSet->GetMaxEnergyAttribute()).AddLambda(
+			[this](const FOnAttributeChangeData& Data)
+			{
+				OnMaxEnergyChanged.Broadcast(Data.NewValue);
+			}
+	);
 
 	Cast<UVR_AbilitySystemComponentBase>(AbilitySystemComponent)->EffectAssetTags.AddLambda(
 		[this](const FGameplayTagContainer& AssetTags)
@@ -63,36 +93,4 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 			}
 		}
 	);
-}
-
-
-void UOverlayWidgetController::HealthChanged(const FOnAttributeChangeData& Data) const
-{
-	OnHealthChanged.Broadcast(Data.NewValue);
-}
-
-
-void UOverlayWidgetController::MaxHealthChanged(const FOnAttributeChangeData& Data) const
-{
-	OnMaxHealthChanged.Broadcast(Data.NewValue);
-}
-
-void UOverlayWidgetController::ManaChanged(const FOnAttributeChangeData& Data) const
-{
-	OnManaChanged.Broadcast(Data.NewValue);
-}
-
-void UOverlayWidgetController::MaxManaChanged(const FOnAttributeChangeData& Data) const
-{
-	OnMaxManaChanged.Broadcast(Data.NewValue);
-}
-
-void UOverlayWidgetController::EnergyChanged(const FOnAttributeChangeData& Data) const
-{
-	OnEnergyChanged.Broadcast(Data.NewValue);
-}
-
-void UOverlayWidgetController::MaxEnergyChanged(const FOnAttributeChangeData& Data) const
-{
-	OnMaxEnergyChanged.Broadcast(Data.NewValue);
 }

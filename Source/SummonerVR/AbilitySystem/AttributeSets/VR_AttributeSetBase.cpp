@@ -20,23 +20,23 @@ UVR_AttributeSetBase::UVR_AttributeSetBase()
 }
 
 //clamping
-void UVR_AttributeSetBase::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)
-{
-	Super::PreAttributeChange(Attribute, NewValue);
-
-	if (Attribute == GetHealthAttribute())
-	{
-		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxHealth());
-	}
-	if (Attribute == GetManaAttribute())
-	{
-		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxMana());
-	}
-	if (Attribute == GetEnergyAttribute())
-	{
-		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxEnergy());
-	}
-}
+// void UVR_AttributeSetBase::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)
+// {
+// 	Super::PreAttributeChange(Attribute, NewValue);
+// 
+// 	if (Attribute == GetHealthAttribute())
+// 	{
+// 		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxHealth());
+// 	}
+// 	if (Attribute == GetManaAttribute())
+// 	{
+// 		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxMana());
+// 	}
+// 	if (Attribute == GetEnergyAttribute())
+// 	{
+// 		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxEnergy());
+// 	}
+// }
 
 void UVR_AttributeSetBase::SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props) const
 {
@@ -77,4 +77,17 @@ void UVR_AttributeSetBase::PostGameplayEffectExecute(const struct FGameplayEffec
 
 	FEffectProperties Props;
 	SetEffectProperties(Data, Props);
+
+	if (Data.EvaluatedData.Attribute == GetHealthAttribute())
+	{
+		SetHealth(FMath::Clamp(GetHealth(), 0.f, GetMaxHealth()));
+	}
+	if (Data.EvaluatedData.Attribute == GetManaAttribute())
+	{
+		SetMana(FMath::Clamp(GetMana(), 0.f, GetMaxMana()));
+	}
+	if (Data.EvaluatedData.Attribute == GetEnergyAttribute())
+	{
+		SetEnergy(FMath::Clamp(GetEnergy(), 0.f, GetMaxEnergy()));
+	}
 }
