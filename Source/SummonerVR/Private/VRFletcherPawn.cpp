@@ -33,5 +33,6 @@ void AVRFletcherPawn::InitAbilityActorInfo()
 {
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
 	Cast<UVR_AbilitySystemComponentBase>(AbilitySystemComponent)->AbilityActorInfoSet();
+	InitializeDefaultAttributes();
 };
 

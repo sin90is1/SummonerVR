@@ -9,14 +9,7 @@
 
 UVR_AttributeSetBase::UVR_AttributeSetBase()
 {
-	InitHealth(150.f);
-	InitMaxHealth(200.f);
 
-	InitMana(30.f);
-	InitMaxMana(100.f);
-
-	InitEnergy(65.f);
-	InitMaxEnergy(100.f);
 }
 
 //clamping

@@ -61,31 +61,95 @@ class SUMMONERVR_API UVR_AttributeSetBase : public UAttributeSet
 	// but we also doing a lot of things in PostAttributeChange so we use this instead
 /*	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;*/
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GAS|Character")
+
+	/*
+	 * Primary Attributes
+	 */
+
+	UPROPERTY(BlueprintReadOnly, Category = "Primary Attributes")
+	FGameplayAttributeData Strength;
+	ATTRIBUTE_ACCESSORS(UVR_AttributeSetBase, Strength);
+
+	UPROPERTY(BlueprintReadOnly, Category = "Primary Attributes")
+	FGameplayAttributeData Intelligence;
+	ATTRIBUTE_ACCESSORS(UVR_AttributeSetBase, Intelligence);
+
+	UPROPERTY(BlueprintReadOnly, Category = "Primary Attributes")
+	FGameplayAttributeData Defence;
+	ATTRIBUTE_ACCESSORS(UVR_AttributeSetBase, Defence);
+
+	UPROPERTY(BlueprintReadOnly, Category = "Primary Attributes")
+	FGameplayAttributeData Vigor;
+	ATTRIBUTE_ACCESSORS(UVR_AttributeSetBase, Vigor);
+
+	
+	/*
+	 * Secondary Attributes
+	 */
+
+	UPROPERTY(BlueprintReadOnly, Category = "Secondary Attributes")
+	FGameplayAttributeData Armor;
+	ATTRIBUTE_ACCESSORS(UVR_AttributeSetBase, Armor);
+
+	UPROPERTY(BlueprintReadOnly, Category = "Secondary Attributes")
+	FGameplayAttributeData ArmorPenetration;
+	ATTRIBUTE_ACCESSORS(UVR_AttributeSetBase, ArmorPenetration);
+
+	UPROPERTY(BlueprintReadOnly, Category = "Secondary Attributes")
+	FGameplayAttributeData BlockChance;
+	ATTRIBUTE_ACCESSORS(UVR_AttributeSetBase, BlockChance);
+
+	UPROPERTY(BlueprintReadOnly, Category = "Secondary Attributes")
+	FGameplayAttributeData CriticalHitChance;
+	ATTRIBUTE_ACCESSORS(UVR_AttributeSetBase, CriticalHitChance);
+
+	UPROPERTY(BlueprintReadOnly, Category = "Secondary Attributes")
+	FGameplayAttributeData CriticalHitDamage;
+	ATTRIBUTE_ACCESSORS(UVR_AttributeSetBase, CriticalHitDamage);
+
+		UPROPERTY(BlueprintReadOnly, Category = "Secondary Attributes")
+	FGameplayAttributeData CriticalHitResistance;
+	ATTRIBUTE_ACCESSORS(UVR_AttributeSetBase, CriticalHitResistance);
+
+	UPROPERTY(BlueprintReadOnly, Category = "Secondary Attributes")
+	FGameplayAttributeData HealthRegeneration;
+	ATTRIBUTE_ACCESSORS(UVR_AttributeSetBase, HealthRegeneration);
+
+	UPROPERTY(BlueprintReadOnly, Category = "Secondary Attributes")
+	FGameplayAttributeData ManaRegeneration;
+	ATTRIBUTE_ACCESSORS(UVR_AttributeSetBase, ManaRegeneration);
+
+	UPROPERTY(BlueprintReadOnly, Category = "Secondary Attributes")
+	FGameplayAttributeData EnergyRegeneration;
+	ATTRIBUTE_ACCESSORS(UVR_AttributeSetBase, EnergyRegeneration);
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Vital Attributes")
 	FGameplayAttributeData MaxHealth;
 	ATTRIBUTE_ACCESSORS(UVR_AttributeSetBase, MaxHealth)
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GAS|Character")
-	FGameplayAttributeData Health;
-	ATTRIBUTE_ACCESSORS(UVR_AttributeSetBase, Health)
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GAS|Character")
-	FGameplayAttributeData Mana;
-	ATTRIBUTE_ACCESSORS(UVR_AttributeSetBase, Mana)
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GAS|Character")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Vital Attributes")
 	FGameplayAttributeData MaxMana;
 	ATTRIBUTE_ACCESSORS(UVR_AttributeSetBase, MaxMana)
 
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GAS|Character")
-	FGameplayAttributeData Energy;
-	ATTRIBUTE_ACCESSORS(UVR_AttributeSetBase, Energy)
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GAS|Character")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Vital Attributes")
 	FGameplayAttributeData MaxEnergy;
 	ATTRIBUTE_ACCESSORS(UVR_AttributeSetBase, MaxEnergy)
 
+	/*
+	 * Vital Attributes
+	 */
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Vital Attributes")
+	FGameplayAttributeData Health;
+	ATTRIBUTE_ACCESSORS(UVR_AttributeSetBase, Health)
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Vital Attributes")
+	FGameplayAttributeData Mana;
+	ATTRIBUTE_ACCESSORS(UVR_AttributeSetBase, Mana)
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Vital Attributes")
+	FGameplayAttributeData Energy;
+	ATTRIBUTE_ACCESSORS(UVR_AttributeSetBase, Energy)
 
 private:
 
