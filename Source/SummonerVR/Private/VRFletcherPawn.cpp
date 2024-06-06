@@ -29,6 +29,11 @@ void AVRFletcherPawn::PossessedBy(AController* NewController)
 // 	}
 }
 
+int32 AVRFletcherPawn::GetPlayerLevel()
+{
+	return Level;
+}
+
 void AVRFletcherPawn::InitAbilityActorInfo()
 {
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);

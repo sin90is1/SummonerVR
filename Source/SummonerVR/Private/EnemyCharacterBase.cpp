@@ -38,3 +38,8 @@ void AEnemyCharacterBase::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 }
+
+int32 AEnemyCharacterBase::GetPlayerLevel()
+{
+	return Level;
+}

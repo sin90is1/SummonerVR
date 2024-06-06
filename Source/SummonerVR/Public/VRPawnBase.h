@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "AbilitySystemInterface.h"
 #include "GameFramework/Pawn.h"
+#include "Interaction/CombatInterface.h"
 #include "VRPawnBase.generated.h"
 
 
@@ -18,7 +19,7 @@ class UGameplayEffect;
 //  class UVRUserWidget;
 
 UCLASS()
-class SUMMONERVR_API AVRPawnBase : public APawn, public  IAbilitySystemInterface
+class SUMMONERVR_API AVRPawnBase : public APawn, public  IAbilitySystemInterface, public ICombatInterface
 {
 	GENERATED_BODY()
 
@@ -52,6 +53,8 @@ protected:
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Attributes")
 	TSubclassOf<UGameplayEffect> DefaultSecondaryAttributes;
 
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Attributes")
+	TSubclassOf<UGameplayEffect> DefaultVitalAttributes;
 
 	void ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level) const;
 	void InitializeDefaultAttributes() const;
