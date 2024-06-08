@@ -47,9 +47,9 @@ UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
 	TSubclassOf<UOverlayWidgetController> OverlayWidgetControllerClass;
 
 	//for VR
-	private:
+protected:
     // Add this line
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets", meta = (AllowPrivateAccess = "true"))
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
     TObjectPtr<UWidgetComponent> ShowedWidget;
 
 	public:

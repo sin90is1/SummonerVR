@@ -13,6 +13,7 @@
 AWidgetContainerActor::AWidgetContainerActor()
 {
 	ShowedWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("ShowedWidget"));
+	ShowedWidget->SetDrawAtDesiredSize(true);
 	ShowedWidget->SetupAttachment(RootComponent);
 }
 
