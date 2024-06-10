@@ -36,6 +36,6 @@ void AVRHUD::InitOverlay(APlayerController* PC, UAbilitySystemComponent* ASC, UA
 	OverlayWidget->SetWidgetController(WidgetController);
 	WidgetController->BroadcastInitialValues();
 
-	Widget->AddToViewport();
+/*	Widget->AddToViewport();*/
 
 }
