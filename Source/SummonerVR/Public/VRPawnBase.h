@@ -6,6 +6,7 @@
 #include "AbilitySystemInterface.h"
 #include "GameFramework/Pawn.h"
 #include "Interaction/CombatInterface.h"
+#include "Actors/WidgetContainerActor.h"
 #include "VRPawnBase.generated.h"
 
 
@@ -15,7 +16,7 @@ class UGameplayEffect;
 
 // 
 // //for VR HUD
-// class AWidgetContainerActor;
+//  class AWidgetContainerActor;
 //  class UVRUserWidget;
 
 UCLASS()
@@ -36,6 +37,10 @@ public:
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
 	UAttributeSet* GetUAttributeSet() const { return AttributeSet; }
+
+	// Add a UPROPERTY to reference the WidgetContainerActor
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Widget")
+    AWidgetContainerActor* WidgetContainerActor;
 
 protected:
 
