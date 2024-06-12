@@ -26,3 +26,23 @@ UOverlayWidgetController* UVRAbilitySystemLibrary::GetOverlayWidgetController(co
 	}
 	return nullptr;
 }
+
+UAttributeMenuWidgetController* UVRAbilitySystemLibrary::GetAttributeMenuWidgetController(const UObject* WorldContextObject)
+{
+	if (APlayerController* PC = UGameplayStatics::GetPlayerController(WorldContextObject, 0))
+	{
+		if (AVRPawnBase* PlayerPawn = Cast<AVRPawnBase>(PC->GetPawn()))
+		{
+			// Use the WidgetContainerActor property directly
+			if (AWidgetContainerActor* WidgetContainer = Cast<AWidgetContainerActor>(PlayerPawn->WidgetContainerActor))
+			{
+				UAbilitySystemComponent* ASC = PlayerPawn->GetAbilitySystemComponent();
+				UAttributeSet* AS = PlayerPawn->GetUAttributeSet();
+				const FWidgetControllerParams WidgetControllerParams(PC, ASC, AS);
+
+				return WidgetContainer->GetAttributeMenuWidgetController(WidgetControllerParams);
+			}
+		}
+	}
+	return nullptr;
+}

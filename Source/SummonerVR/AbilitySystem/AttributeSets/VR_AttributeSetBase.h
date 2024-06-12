@@ -48,6 +48,13 @@ struct FEffectProperties
 	APawn* TargetPawn = nullptr;
 };
 
+
+// typedef is specific to the FGameplayAttribute() signature, but TStaticFunPtr is generic to any signature chosen
+//typedef TBaseStaticDelegateInstance<FGameplayAttribute(), FDefaultDelegateUserPolicy>::FFuncPtr FAttributeFuncPtr;
+template<class T>
+using TStaticFuncPtr = typename TBaseStaticDelegateInstance<T, FDefaultDelegateUserPolicy>::FFuncPtr;
+
+
 UCLASS()
 class SUMMONERVR_API UVR_AttributeSetBase : public UAttributeSet
 {
@@ -57,11 +64,20 @@ class SUMMONERVR_API UVR_AttributeSetBase : public UAttributeSet
 
 	UVR_AttributeSetBase();
 
+	TMap<FGameplayTag, TStaticFuncPtr<FGameplayAttribute()>> TagsToAttributes;
+
+	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data) override;
+
 	//like PostAttributeChange we should do the clamping on it and not the logic but it's better to do it in PostAttributeChange
-	// but we also doing a lot of things in PostAttributeChange so we use this instead
+// but we also doing a lot of things in PostAttributeChange so we use this instead
 /*	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;*/
 
+private:
 
+	void SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props) const;
+
+
+public:
 	/*
 	 * Primary Attributes
 	 */
@@ -150,14 +166,5 @@ class SUMMONERVR_API UVR_AttributeSetBase : public UAttributeSet
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Vital Attributes")
 	FGameplayAttributeData Energy;
 	ATTRIBUTE_ACCESSORS(UVR_AttributeSetBase, Energy)
-
-private:
-
-	void SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props) const;
-
-
-protected:
-
-	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data) override;
 
 };

@@ -10,6 +10,7 @@
 class UAttributeSet;
 class UAbilitySystemComponent;
 class UOverlayWidgetController;
+class UAttributeMenuWidgetController;
 class UVRUserWidget;
 
 struct FWidgetControllerParams;
@@ -31,6 +32,8 @@ public:
 
 	UOverlayWidgetController* GetOverlayWidgetController(const FWidgetControllerParams& WCParams);
 
+	UAttributeMenuWidgetController* GetAttributeMenuWidgetController(const FWidgetControllerParams& WCParams);
+
 	void InitOverlay(APlayerController* PC, UAbilitySystemComponent* ASC, UAttributeSet* AS);
 
 	UFUNCTION(BlueprintCallable, Category = "Widgets")
@@ -43,8 +46,14 @@ UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
 	UPROPERTY()
 	TObjectPtr<UOverlayWidgetController> OverlayWidgetController;
 
-UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
 	TSubclassOf<UOverlayWidgetController> OverlayWidgetControllerClass;
+
+	UPROPERTY()
+	TObjectPtr<UAttributeMenuWidgetController> AttributeMenuWidgetController;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UAttributeMenuWidgetController> AttributeMenuWidgetControllerClass;
 
 	//for VR
 protected:
