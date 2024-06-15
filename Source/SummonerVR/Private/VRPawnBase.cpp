@@ -5,6 +5,7 @@
 
 #include "AbilitySystem/Components/VR_AbilitySystemComponentBase.h"
 #include "AbilitySystem/AttributeSets/VR_AttributeSetBase.h"
+#include "AbilitySystem/Components/VR_AbilitySystemComponentBase.h"
 
 // Sets default values
 AVRPawnBase::AVRPawnBase()
@@ -52,5 +53,12 @@ void AVRPawnBase::InitializeDefaultAttributes() const
 	ApplyEffectToSelf(DefaultVitalAttributes, 1.f);
 }
 
+void AVRPawnBase::AddCharacterAbilities()
+{
+	UVR_AbilitySystemComponentBase* AuraASC = CastChecked<UVR_AbilitySystemComponentBase>(AbilitySystemComponent);
+/*	if (!HasAuthority()) return;*/
+
+	AuraASC->AddCharacterAbilities(StartupAbilities);
+}
 
 

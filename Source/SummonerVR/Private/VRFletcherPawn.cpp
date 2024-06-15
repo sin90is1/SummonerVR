@@ -19,6 +19,7 @@ void AVRFletcherPawn::PossessedBy(AController* NewController)
 	Super::PossessedBy(NewController);
 
 	InitAbilityActorInfo();
+	AddCharacterAbilities();
 	//not needed because of 3d widget
 // 	if (AVRPlayerController* VRPlayerController = Cast<AVRPlayerController>(GetController()))
 // 	{
