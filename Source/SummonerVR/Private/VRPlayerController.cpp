@@ -2,6 +2,9 @@
 
 
 #include "VRPlayerController.h"
+
+#include "AbilitySystemBlueprintLibrary.h"
+#include "AbilitySystem/Components/VR_AbilitySystemComponentBase.h"
 #include "Input/VRInputComponent.h"
 
 
@@ -16,17 +19,28 @@ void AVRPlayerController::SetupInputComponent()
 
 void AVRPlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 {
-	GEngine->AddOnScreenDebugMessage(1, 3.f, FColor::Red, *InputTag.ToString());
+	//GEngine->AddOnScreenDebugMessage(1, 3.f, FColor::Red, *InputTag.ToString());
 }
 
 
 void AVRPlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 {
-	GEngine->AddOnScreenDebugMessage(2, 3.f, FColor::Blue, *InputTag.ToString());
+	if (GetASC() == nullptr) return;
+	GetASC()->AbilityInputTagReleased(InputTag);
 }
 
 
 void AVRPlayerController::AbilityInputTagHeld(FGameplayTag InputTag)
 {
-	GEngine->AddOnScreenDebugMessage(3, 3.f, FColor::Green, *InputTag.ToString());
+	if (GetASC() == nullptr) return;
+	GetASC()->AbilityInputTagHeld(InputTag);
+}
+
+UVR_AbilitySystemComponentBase* AVRPlayerController::GetASC()
+{
+	if (VRAbilitySystemComponent == nullptr)
+	{
+		VRAbilitySystemComponent = Cast<UVR_AbilitySystemComponentBase>(UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetPawn<APawn>()));
+	}
+	return VRAbilitySystemComponent;
 }

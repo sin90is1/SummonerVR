@@ -8,6 +8,7 @@
 #include "VRPlayerController.generated.h"
 
 class UVRInputConfig;
+class UVR_AbilitySystemComponentBase;
 /**
  * 
  */
@@ -28,4 +29,9 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	TObjectPtr<UVRInputConfig> InputConfig;
+
+	UPROPERTY()
+	TObjectPtr<UVR_AbilitySystemComponentBase> VRAbilitySystemComponent;
+
+	UVR_AbilitySystemComponentBase* GetASC();
 };
