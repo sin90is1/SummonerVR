@@ -95,4 +95,28 @@ void FVRGameplayTags::InitializeNativeGameplayTags()
 		FName("Attributes.Secondary.MaxEnergy"),
 		FString("Maximum amount of Energy obtainable")
 	);
+
+	/*
+	* Input Tags
+	*/
+
+	GameplayTags.InputTag_LT = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.LT"),
+		FString("Input Tag for Left Mouse Trigger")
+	);
+
+	GameplayTags.InputTag_RT = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.RT"),
+		FString("Input Tag for Right Trigger")
+	);
+
+	GameplayTags.InputTag_A = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.A"),
+		FString("Input Tag for A Button")
+	);
+
+	GameplayTags.InputTag_X = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("InputTag.X"),
+		FString("Input Tag for X Button")
+	);
 }

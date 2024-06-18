@@ -35,7 +35,10 @@ public:
 	FGameplayTag Attributes_Secondary_MaxMana;
 	FGameplayTag Attributes_Secondary_MaxEnergy;
 
-
+	FGameplayTag InputTag_LT;
+	FGameplayTag InputTag_RT;
+	FGameplayTag InputTag_A;
+	FGameplayTag InputTag_X;
 protected:
 
 private:
