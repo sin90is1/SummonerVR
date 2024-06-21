@@ -13,8 +13,9 @@ AEnemyCharacterBase::AEnemyCharacterBase()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	//AbilitySystemComponent = CreateDefaultSubobject<UVR_AbilitySystemComponentBase>("AbilitySystemComponent");
-	//AttributeSet = CreateDefaultSubobject<UVR_AttributeSetBase>("AttributeSetBase");
+	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>("Weapon");
+	//change and fix the line below in future
+/*	Weapon->SetupAttachment(Get(), WeaponHandSocket);*/
 
 }
 
@@ -30,6 +31,12 @@ void AEnemyCharacterBase::InitAbilityActorInfo()
 {
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
 	Cast<UVR_AbilitySystemComponentBase>(AbilitySystemComponent)->AbilityActorInfoSet();
+}
+
+FVector AEnemyCharacterBase::GetCombatSocketLocation()
+{
+	check(Weapon);
+	return Weapon->GetSocketLocation(WeaponTipSocketName);
 }
 
 // Called every frame

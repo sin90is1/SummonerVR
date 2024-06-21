@@ -42,3 +42,16 @@ void AVRFletcherPawn::InitAbilityActorInfo()
 	InitializeDefaultAttributes();
 };
 
+//it works an it is flexible but I think I could Improve it a little in future 
+FVector AVRFletcherPawn::GetCombatSocketLocation()
+{
+  	check(WeaponToUse)
+	return WeaponToUse->GetSocketLocation(WeaponTipSocketName);
+}
+
+
+void AVRFletcherPawn::BP_SetWeapon(USkeletalMeshComponent* Weapon)
+{
+	WeaponToUse = Weapon;
+}
+
