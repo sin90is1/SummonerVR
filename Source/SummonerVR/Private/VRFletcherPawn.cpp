@@ -20,14 +20,7 @@ void AVRFletcherPawn::PossessedBy(AController* NewController)
 
 	InitAbilityActorInfo();
 	AddCharacterAbilities();
-	//not needed because of 3d widget
-// 	if (AVRPlayerController* VRPlayerController = Cast<AVRPlayerController>(GetController()))
-// 	{
-// 		if (AVRHUD* VRHUD = Cast<AVRHUD>(VRPlayerController->GetHUD()))
-// 		{
-// 			VRHUD->InitOverlay(VRPlayerController, AbilitySystemComponent, AttributeSet);
-// 		}
-// 	}
+
 }
 
 int32 AVRFletcherPawn::GetPlayerLevel()
