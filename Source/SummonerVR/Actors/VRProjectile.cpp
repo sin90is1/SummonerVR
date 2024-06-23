@@ -3,8 +3,12 @@
 
 #include "Actors/VRProjectile.h"
 
+#include "NiagaraFunctionLibrary.h"
+#include "SummonerVR.h"
+#include "Components/AudioComponent.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 
 AVRProjectile::AVRProjectile()
@@ -12,6 +16,7 @@ AVRProjectile::AVRProjectile()
 	PrimaryActorTick.bCanEverTick = false;
 	Sphere = CreateDefaultSubobject<USphereComponent>("Sphere");
 	SetRootComponent(Sphere);
+	Sphere->SetCollisionObjectType(ECC_Projectile);
 	Sphere->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	Sphere->SetCollisionResponseToAllChannels(ECR_Ignore);
 	Sphere->SetCollisionResponseToChannel(ECC_WorldDynamic, ECR_Overlap);
@@ -27,10 +32,21 @@ AVRProjectile::AVRProjectile()
 void AVRProjectile::BeginPlay()
 {
 	Super::BeginPlay();
+	SetLifeSpan(LifeSpan);
+	UGameplayStatics::PlaySoundAtLocation(this, CastSound, GetActorLocation(), FRotator::ZeroRotator);
 	Sphere->OnComponentBeginOverlap.AddDynamic(this, &AVRProjectile::OnSphereOverlap);
-	
+	LoopingSoundComponent = UGameplayStatics::SpawnSoundAttached(LoopingSound, GetRootComponent());
+}
+
+void AVRProjectile::Destroyed()
+{
+	Super::Destroyed();
 }
 
 void AVRProjectile::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
+	UGameplayStatics::PlaySoundAtLocation(this, ImpactSound, GetActorLocation(), FRotator::ZeroRotator);
+	UNiagaraFunctionLibrary::SpawnSystemAtLocation(this, ImpactEffect, GetActorLocation());
+	LoopingSoundComponent->Stop();
+	Destroy();
 }

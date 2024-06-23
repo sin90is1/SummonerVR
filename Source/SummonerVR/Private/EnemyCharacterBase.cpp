@@ -3,6 +3,8 @@
 
 #include "EnemyCharacterBase.h"
 
+#include "SummonerVR.h"
+#include "Components/CapsuleComponent.h"
 #include "AbilitySystem/Components/VR_AbilitySystemComponentBase.h"
 #include "AbilitySystem/AttributeSets/VR_AttributeSetBase.h"
 
@@ -14,7 +16,18 @@ AEnemyCharacterBase::AEnemyCharacterBase()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>("Weapon");
+	CapsuleComponent = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CapsuleComponent"));
+	RootComponent = CapsuleComponent;
+
+	// Set default values for Capsule Size
+	CapsuleHalfHeight = 96.0f;
+	CapsuleRadius = 42.0f;
+	CapsuleComponent->InitCapsuleSize(CapsuleRadius, CapsuleHalfHeight);
+
+	CharacterMesh = CreateDefaultSubobject<USkeletalMeshComponent>("CharacterMesh");
+	CharacterMesh->SetupAttachment(RootComponent);
+	CharacterMesh->SetCollisionResponseToChannel(ECC_Projectile, ECR_Overlap);
+	CharacterMesh->SetGenerateOverlapEvents(true);
 	//change and fix the line below in future
 /*	Weapon->SetupAttachment(Get(), WeaponHandSocket);*/
 
@@ -36,8 +49,14 @@ void AEnemyCharacterBase::InitAbilityActorInfo()
 
 FVector AEnemyCharacterBase::GetCombatSocketLocation()
 {
-	check(Weapon);
-	return Weapon->GetSocketLocation(WeaponTipSocketName);
+	check(CharacterMesh);
+	return CharacterMesh->GetSocketLocation(WeaponTipSocketName);
+}
+
+FRotator AEnemyCharacterBase::GetCombatSocketRotation()
+{
+	check(CharacterMesh)
+	return CharacterMesh->GetSocketRotation(WeaponTipSocketName);
 }
 
 // Called every frame

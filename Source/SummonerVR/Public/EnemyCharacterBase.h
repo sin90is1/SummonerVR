@@ -8,6 +8,7 @@
 #include "EnemyCharacterBase.generated.h"
 
 
+class UCapsuleComponent;
 
 UCLASS()
 class SUMMONERVR_API AEnemyCharacterBase : public AVRPawnBase
@@ -19,13 +20,25 @@ public:
 	AEnemyCharacterBase();
 
 protected:
+    // Capsule Component
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
+    UCapsuleComponent* CapsuleComponent;
+
+    // Editable properties for Capsule Size
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Capsule Settings")
+    float CapsuleHalfHeight;
+
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Capsule Settings")
+    float CapsuleRadius;
+
 	
 	virtual void BeginPlay() override;
 	virtual void InitAbilityActorInfo() override;
 	virtual FVector GetCombatSocketLocation() override;
+	virtual FRotator GetCombatSocketRotation() override;
 
 	UPROPERTY(EditAnywhere, Category = "Combat")
-	TObjectPtr<USkeletalMeshComponent> Weapon;
+	TObjectPtr<USkeletalMeshComponent> CharacterMesh;
 
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	FName WeaponTipSocketName;

@@ -38,7 +38,7 @@ protected:
 	FName WeaponTipSocketName;
 
 	virtual FVector GetCombatSocketLocation() override;
-
+	virtual FRotator GetCombatSocketRotation() override;
 	
 	UFUNCTION(BlueprintCallable, Category = "Combat")
 	void BP_SetWeapon(USkeletalMeshComponent* Weapon);

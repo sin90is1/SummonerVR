@@ -43,6 +43,12 @@ FVector AVRFletcherPawn::GetCombatSocketLocation()
 }
 
 
+FRotator AVRFletcherPawn::GetCombatSocketRotation()
+{
+	check(WeaponToUse)
+	return WeaponToUse->GetSocketRotation(WeaponTipSocketName);
+}
+
 void AVRFletcherPawn::BP_SetWeapon(USkeletalMeshComponent* Weapon)
 {
 	WeaponToUse = Weapon;

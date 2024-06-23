@@ -25,4 +25,5 @@ public:
 
 	virtual int32 GetPlayerLevel();
 	virtual FVector GetCombatSocketLocation();
+	virtual FRotator GetCombatSocketRotation();
 };

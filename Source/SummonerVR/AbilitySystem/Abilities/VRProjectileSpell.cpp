@@ -10,14 +10,20 @@ void UVRProjectileSpell::ActivateAbility(const FGameplayAbilitySpecHandle Handle
 {
 	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
 
+
+}
+
+void UVRProjectileSpell::SpawnProjectile()
+{
 	ICombatInterface* CombatInterface = Cast<ICombatInterface>(GetAvatarActorFromActorInfo());
 	if (CombatInterface)
 	{
 		const FVector SocketLocation = CombatInterface->GetCombatSocketLocation();
+		const FRotator SocketRotation = CombatInterface->GetCombatSocketRotation();
 
 		FTransform SpawnTransform;
 		SpawnTransform.SetLocation(SocketLocation);
-		//TODO: Set the Projectile Rotation
+		SpawnTransform.SetRotation(SocketRotation.Quaternion());
 
 		AVRProjectile* Projectile = GetWorld()->SpawnActorDeferred<AVRProjectile>(
 			ProjectileClass,
