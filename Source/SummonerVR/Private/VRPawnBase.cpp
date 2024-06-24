@@ -25,6 +25,14 @@ void AVRPawnBase::BeginPlay()
 {
 	Super::BeginPlay();
 
+	if (GetCapsuleComponent())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("CapsuleComponent is valid"));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("CapsuleComponent is NULL"));
+	}
 }
 
 UAbilitySystemComponent* AVRPawnBase::GetAbilitySystemComponent() const

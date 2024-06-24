@@ -22,9 +22,6 @@ public:
 	AEnemyCharacterBase();
 
 protected:
-    // Capsule Component
-    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
-    UCapsuleComponent* CapsuleComponent;
 
     // Editable properties for Capsule Size
     UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Capsule Settings")
@@ -38,9 +35,6 @@ protected:
 	virtual void InitAbilityActorInfo() override;
 	virtual FVector GetCombatSocketLocation() override;
 	virtual FRotator GetCombatSocketRotation() override;
-
-	UPROPERTY(EditAnywhere, Category = "Combat")
-	TObjectPtr<USkeletalMeshComponent> CharacterMesh;
 
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	FName WeaponTipSocketName;

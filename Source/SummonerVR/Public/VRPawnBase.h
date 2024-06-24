@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AbilitySystemInterface.h"
-#include "GameFramework/Pawn.h"
+#include "GameFramework/Character.h"
 #include "Interaction/CombatInterface.h"
 #include "Actors/WidgetContainerActor.h"
 #include "VRPawnBase.generated.h"
@@ -21,7 +21,7 @@ class UGameplayAbility;
 //  class UVRUserWidget;
 
 UCLASS()
-class SUMMONERVR_API AVRPawnBase : public APawn, public  IAbilitySystemInterface, public ICombatInterface
+class SUMMONERVR_API AVRPawnBase : public ACharacter, public  IAbilitySystemInterface, public ICombatInterface
 {
 	GENERATED_BODY()
 

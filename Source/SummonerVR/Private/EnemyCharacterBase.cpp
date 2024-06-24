@@ -18,18 +18,16 @@ AEnemyCharacterBase::AEnemyCharacterBase()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	CapsuleComponent = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CapsuleComponent"));
-	RootComponent = CapsuleComponent;
-
-	// Set default values for Capsule Size
 	CapsuleHalfHeight = 96.0f;
 	CapsuleRadius = 42.0f;
-	CapsuleComponent->InitCapsuleSize(CapsuleRadius, CapsuleHalfHeight);
 
-	CharacterMesh = CreateDefaultSubobject<USkeletalMeshComponent>("CharacterMesh");
-	CharacterMesh->SetupAttachment(GetRootComponent());
-	CharacterMesh->SetCollisionResponseToChannel(ECC_Projectile, ECR_Overlap);
-	CharacterMesh->SetGenerateOverlapEvents(true);
+	GetCapsuleComponent()->InitCapsuleSize(CapsuleRadius, CapsuleHalfHeight);
+	GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
+	GetCapsuleComponent()->SetGenerateOverlapEvents(false);
+
+	GetMesh()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
+	GetMesh()->SetCollisionResponseToChannel(ECC_Projectile, ECR_Overlap);
+	GetMesh()->SetGenerateOverlapEvents(true);
 
 
 	HealthBar = CreateDefaultSubobject<UWidgetComponent>("HealthBar");
@@ -81,14 +79,14 @@ void AEnemyCharacterBase::InitAbilityActorInfo()
 
 FVector AEnemyCharacterBase::GetCombatSocketLocation()
 {
-	check(CharacterMesh);
-	return CharacterMesh->GetSocketLocation(WeaponTipSocketName);
+	check(GetMesh());
+	return GetMesh()->GetSocketLocation(WeaponTipSocketName);
 }
 
 FRotator AEnemyCharacterBase::GetCombatSocketRotation()
 {
-	check(CharacterMesh)
-	return CharacterMesh->GetSocketRotation(WeaponTipSocketName);
+	check(GetMesh())
+	return GetMesh()->GetSocketRotation(WeaponTipSocketName);
 }
 
 // Called every frame
