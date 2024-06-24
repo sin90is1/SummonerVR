@@ -4,11 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "UI/WidgetController/OverlayWidgetController.h"
 #include "VRPawnBase.h"
 #include "EnemyCharacterBase.generated.h"
 
 
 class UCapsuleComponent;
+class UWidgetComponent;
 
 UCLASS()
 class SUMMONERVR_API AEnemyCharacterBase : public AVRPawnBase
@@ -51,7 +53,16 @@ public:
 	virtual int32 GetPlayerLevel() override;
 	/** end Combat Interface */
 
+	UPROPERTY(BlueprintAssignable)
+	FOnAttributeChangedSignature OnHealthChanged;
+
+	UPROPERTY(BlueprintAssignable)
+	FOnAttributeChangedSignature OnMaxHealthChanged;
+
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Character Class Defaults")
 	int32 Level = 1;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TObjectPtr<UWidgetComponent> HealthBar;
 };

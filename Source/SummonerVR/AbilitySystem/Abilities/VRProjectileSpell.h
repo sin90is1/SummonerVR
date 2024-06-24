@@ -8,6 +8,7 @@
 
 
 class AVRProjectile;
+class UGameplayEffect;
 /**
  * 
  */
@@ -25,5 +26,8 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<AVRProjectile> ProjectileClass;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TSubclassOf<UGameplayEffect> DamageEffectClass;
 
 };

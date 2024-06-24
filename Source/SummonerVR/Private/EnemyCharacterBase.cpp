@@ -7,6 +7,8 @@
 #include "Components/CapsuleComponent.h"
 #include "AbilitySystem/Components/VR_AbilitySystemComponentBase.h"
 #include "AbilitySystem/AttributeSets/VR_AttributeSetBase.h"
+#include "Components/WidgetComponent.h"
+#include "UI/Widget/VRUserWidget.h"
 
 
 //Sets default values
@@ -25,11 +27,13 @@ AEnemyCharacterBase::AEnemyCharacterBase()
 	CapsuleComponent->InitCapsuleSize(CapsuleRadius, CapsuleHalfHeight);
 
 	CharacterMesh = CreateDefaultSubobject<USkeletalMeshComponent>("CharacterMesh");
-	CharacterMesh->SetupAttachment(RootComponent);
+	CharacterMesh->SetupAttachment(GetRootComponent());
 	CharacterMesh->SetCollisionResponseToChannel(ECC_Projectile, ECR_Overlap);
 	CharacterMesh->SetGenerateOverlapEvents(true);
-	//change and fix the line below in future
-/*	Weapon->SetupAttachment(Get(), WeaponHandSocket);*/
+
+
+	HealthBar = CreateDefaultSubobject<UWidgetComponent>("HealthBar");
+	HealthBar->SetupAttachment(GetRootComponent());
 
 }
 
@@ -39,12 +43,40 @@ void AEnemyCharacterBase::BeginPlay()
 	Super::BeginPlay();
 	
 	InitAbilityActorInfo();
+
+
+	if (UVRUserWidget* VRUserWidget = Cast<UVRUserWidget>(HealthBar->GetUserWidgetObject()))
+	{
+		VRUserWidget->SetWidgetController(this);
+	}
+
+	if (const UVR_AttributeSetBase* VrAS = Cast<UVR_AttributeSetBase>(AttributeSet))
+	{
+		AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(VrAS->GetHealthAttribute()).AddLambda(
+			[this](const FOnAttributeChangeData& Data)
+			{
+				OnHealthChanged.Broadcast(Data.NewValue);
+			}
+		);
+		AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(VrAS->GetMaxHealthAttribute()).AddLambda(
+			[this](const FOnAttributeChangeData& Data)
+			{
+				OnMaxHealthChanged.Broadcast(Data.NewValue);
+			}
+		);
+
+		OnHealthChanged.Broadcast(VrAS->GetHealth());
+		OnMaxHealthChanged.Broadcast(VrAS->GetMaxHealth());
+	}
+
 }
 
 void AEnemyCharacterBase::InitAbilityActorInfo()
 {
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
 	Cast<UVR_AbilitySystemComponentBase>(AbilitySystemComponent)->AbilityActorInfoSet();
+
+	InitializeDefaultAttributes();
 }
 
 FVector AEnemyCharacterBase::GetCombatSocketLocation()
