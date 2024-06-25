@@ -6,6 +6,7 @@
 #include "SummonerVR.h"
 #include "Components/CapsuleComponent.h"
 #include "AbilitySystem/Components/VR_AbilitySystemComponentBase.h"
+#include "AbilitySystem/VRAbilitySystemLibrary.h"
 #include "AbilitySystem/AttributeSets/VR_AttributeSetBase.h"
 #include "Components/WidgetComponent.h"
 #include "UI/Widget/VRUserWidget.h"
@@ -75,6 +76,11 @@ void AEnemyCharacterBase::InitAbilityActorInfo()
 	Cast<UVR_AbilitySystemComponentBase>(AbilitySystemComponent)->AbilityActorInfoSet();
 
 	InitializeDefaultAttributes();
+}
+
+void AEnemyCharacterBase::InitializeDefaultAttributes() const
+{
+	UVRAbilitySystemLibrary::InitializeDefaultAttributes(this, CharacterClass, Level, AbilitySystemComponent);
 }
 
 FVector AEnemyCharacterBase::GetCombatSocketLocation()
