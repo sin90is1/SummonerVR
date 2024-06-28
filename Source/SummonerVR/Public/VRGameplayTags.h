@@ -39,6 +39,8 @@ public:
 	FGameplayTag InputTag_RT;
 	FGameplayTag InputTag_A;
 	FGameplayTag InputTag_X;
+
+	FGameplayTag Damage;
 protected:
 
 private:

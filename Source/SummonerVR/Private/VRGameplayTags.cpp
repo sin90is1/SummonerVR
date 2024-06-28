@@ -119,4 +119,9 @@ void FVRGameplayTags::InitializeNativeGameplayTags()
 		FName("InputTag.X"),
 		FString("Input Tag for X Button")
 	);
+		
+	GameplayTags.Damage = UGameplayTagsManager::Get().AddNativeGameplayTag(
+			FName("Damage"),
+			FString("Damage")
+	);
 }

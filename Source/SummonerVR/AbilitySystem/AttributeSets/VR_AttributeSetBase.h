@@ -166,5 +166,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Vital Attributes")
 	FGameplayAttributeData Energy;
 	ATTRIBUTE_ACCESSORS(UVR_AttributeSetBase, Energy)
+	/*
+	*Meta Attributes
+	*/
 
+	UPROPERTY(BlueprintReadOnly, Category = "Meta Attributes")
+	FGameplayAttributeData IncomingDamage;
+	ATTRIBUTE_ACCESSORS(UVR_AttributeSetBase, IncomingDamage)
 };
