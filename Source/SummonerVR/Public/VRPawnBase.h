@@ -37,7 +37,6 @@ protected:
 public:	
 
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
-
 	UAttributeSet* GetUAttributeSet() const { return AttributeSet; }
 
 	// Add a UPROPERTY to reference the WidgetContainerActor
@@ -45,6 +44,7 @@ public:
     AWidgetContainerActor* WidgetContainerActor;
 
 	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
+	virtual void Die() override;
 
 protected:
 

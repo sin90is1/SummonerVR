@@ -6,6 +6,7 @@
 #include "AbilitySystem/Components/VR_AbilitySystemComponentBase.h"
 #include "AbilitySystem/AttributeSets/VR_AttributeSetBase.h"
 #include "AbilitySystem/Components/VR_AbilitySystemComponentBase.h"
+#include "Components/CapsuleComponent.h"
 
 // Sets default values
 AVRPawnBase::AVRPawnBase()
@@ -43,6 +44,11 @@ UAbilitySystemComponent* AVRPawnBase::GetAbilitySystemComponent() const
 UAnimMontage* AVRPawnBase::GetHitReactMontage_Implementation()
 {
 	return HitReactMontage;
+}
+
+void AVRPawnBase::Die()
+{
+	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
 void AVRPawnBase::InitAbilityActorInfo()

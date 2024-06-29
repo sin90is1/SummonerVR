@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "GameplayEffectExtension.h"
 #include "VRGameplayTags.h"
+#include "Interaction/CombatInterface.h"
 
 
 UVR_AttributeSetBase::UVR_AttributeSetBase()
@@ -117,7 +118,15 @@ void UVR_AttributeSetBase::PostGameplayEffectExecute(const struct FGameplayEffec
 			SetHealth(FMath::Clamp(NewHealth, 0.f, GetMaxHealth()));
 
 			const bool bFatal = NewHealth <= 0.f;
-			if (!bFatal)
+			if (bFatal)
+			{
+				ICombatInterface* CombatInterface = Cast<ICombatInterface>(Props.TargetAvatarActor);
+				if (CombatInterface)
+				{
+					CombatInterface->Die();
+				}
+			}
+			else
 			{
 				FGameplayTagContainer TagContainer;
 				TagContainer.AddTag(FVRGameplayTags::Get().Effects_HitReact);

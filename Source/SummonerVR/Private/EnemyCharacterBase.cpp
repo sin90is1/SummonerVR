@@ -115,6 +115,19 @@ int32 AEnemyCharacterBase::GetPlayerLevel()
 	return Level;
 }
 
+void AEnemyCharacterBase::Die()
+{
+	SetLifeSpan(LifeSpan);
+
+	GetMesh()->SetEnableGravity(true);
+	GetMesh()->SetSimulatePhysics(true);
+	GetMesh()->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
+	GetMesh()->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Block);
+
+	Super::Die();
+
+}
+
 void AEnemyCharacterBase::HitReactTagChanged(const FGameplayTag CallBackTag, int32 NewCount)
 {
 	bHitReacting = NewCount > 0;
