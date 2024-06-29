@@ -5,11 +5,13 @@
 
 #include "SummonerVR.h"
 #include "Components/CapsuleComponent.h"
+#include "GameFramework\CharacterMovementComponent.h"
 #include "AbilitySystem/Components/VR_AbilitySystemComponentBase.h"
 #include "AbilitySystem/VRAbilitySystemLibrary.h"
 #include "AbilitySystem/AttributeSets/VR_AttributeSetBase.h"
 #include "Components/WidgetComponent.h"
 #include "UI/Widget/VRUserWidget.h"
+#include "VRGameplayTags.h"
 
 
 //Sets default values
@@ -40,8 +42,9 @@ AEnemyCharacterBase::AEnemyCharacterBase()
 void AEnemyCharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	GetCharacterMovement()->MaxWalkSpeed = BaseWalkSpeed;
 	InitAbilityActorInfo();
+	UVRAbilitySystemLibrary::GiveStartupAbilities(this, AbilitySystemComponent);
 
 
 	if (UVRUserWidget* VRUserWidget = Cast<UVRUserWidget>(HealthBar->GetUserWidgetObject()))
@@ -62,6 +65,11 @@ void AEnemyCharacterBase::BeginPlay()
 			{
 				OnMaxHealthChanged.Broadcast(Data.NewValue);
 			}
+		);
+
+		AbilitySystemComponent->RegisterGameplayTagEvent(FVRGameplayTags::Get().Effects_HitReact, EGameplayTagEventType::NewOrRemoved).AddUObject(
+		this,
+			&AEnemyCharacterBase::HitReactTagChanged
 		);
 
 		OnHealthChanged.Broadcast(VrAS->GetHealth());
@@ -105,4 +113,10 @@ void AEnemyCharacterBase::Tick(float DeltaTime)
 int32 AEnemyCharacterBase::GetPlayerLevel()
 {
 	return Level;
+}
+
+void AEnemyCharacterBase::HitReactTagChanged(const FGameplayTag CallBackTag, int32 NewCount)
+{
+	bHitReacting = NewCount > 0;
+	GetCharacterMovement()->MaxWalkSpeed = bHitReacting ? 0.f : BaseWalkSpeed;
 }

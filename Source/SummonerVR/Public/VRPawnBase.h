@@ -14,6 +14,7 @@ class UAbilitySystemComponent;
 class UAttributeSet;
 class UGameplayEffect;
 class UGameplayAbility;
+class UAnimMontage;
 
 // 
 // //for VR HUD
@@ -43,6 +44,8 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Widget")
     AWidgetContainerActor* WidgetContainerActor;
 
+	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
+
 protected:
 
 	UPROPERTY(BlueprintReadOnly)
@@ -71,4 +74,7 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Abilities")
 	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	TObjectPtr<UAnimMontage> HitReactMontage;
 };

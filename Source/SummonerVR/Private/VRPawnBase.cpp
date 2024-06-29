@@ -40,6 +40,11 @@ UAbilitySystemComponent* AVRPawnBase::GetAbilitySystemComponent() const
 	return AbilitySystemComponent;
 }
 
+UAnimMontage* AVRPawnBase::GetHitReactMontage_Implementation()
+{
+	return HitReactMontage;
+}
+
 void AVRPawnBase::InitAbilityActorInfo()
 {
 }

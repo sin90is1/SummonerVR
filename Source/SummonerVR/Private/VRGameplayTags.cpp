@@ -124,4 +124,9 @@ void FVRGameplayTags::InitializeNativeGameplayTags()
 			FName("Damage"),
 			FString("Damage")
 	);
+
+	GameplayTags.Effects_HitReact = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Effects.HitReact"),
+		FString("tag granted when Hit Reacting")
+	);
 }
