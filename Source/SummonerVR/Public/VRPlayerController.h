@@ -7,6 +7,7 @@
 #include "GameplayTagContainer.h"
 #include "VRPlayerController.generated.h"
 
+class UDamageTextComponent;
 class UVRInputConfig;
 class UVR_AbilitySystemComponentBase;
 /**
@@ -16,11 +17,16 @@ UCLASS()
 class SUMMONERVR_API AVRPlayerController : public APlayerController
 {
 	GENERATED_BODY()
-	
+
+public:
+		UFUNCTION()
+	void ShowDamageNumber(float DamageAmount, ACharacter* TargetCharacter);
 protected:
 
 	virtual void SetupInputComponent() override;
 
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UDamageTextComponent> DamageTextComponentClass;
 private:
 
 	void AbilityInputTagPressed(FGameplayTag InputTag);

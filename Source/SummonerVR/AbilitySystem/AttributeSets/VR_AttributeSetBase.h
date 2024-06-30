@@ -33,7 +33,7 @@ struct FEffectProperties
 	AController* SourceController = nullptr;
 
 	UPROPERTY()
-	APawn* SourcePawn = nullptr;
+	ACharacter* SourceCharacter = nullptr;
 
 	UPROPERTY()
 	UAbilitySystemComponent* TargetASC = nullptr;
@@ -45,7 +45,7 @@ struct FEffectProperties
 	AController* TargetController = nullptr;
 
 	UPROPERTY()
-	APawn* TargetPawn = nullptr;
+	ACharacter* TargetCharacter = nullptr;
 };
 
 
@@ -75,7 +75,7 @@ class SUMMONERVR_API UVR_AttributeSetBase : public UAttributeSet
 private:
 
 	void SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props) const;
-
+	void ShowFloatingText(const FEffectProperties& Props, float Damage) const;
 
 public:
 	/*
