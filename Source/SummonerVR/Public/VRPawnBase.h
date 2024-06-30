@@ -70,6 +70,17 @@ protected:
 
 	void AddCharacterAbilities();
 
+	/* Dissolve Effect*/
+	void Dissolve();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void StartDissolveTimeline(const TArray<UMaterialInstanceDynamic*>& ArrayOfDynamicMaterialInstance);
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TArray<TObjectPtr<UMaterialInstance>> DissolveMaterialInstances;
+
+// 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+// 	TObjectPtr<UMaterialInstance> LowHpMaterialInstance;
 private:
 
 	UPROPERTY(EditAnywhere, Category = "Abilities")

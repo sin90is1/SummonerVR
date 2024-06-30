@@ -49,6 +49,7 @@ UAnimMontage* AVRPawnBase::GetHitReactMontage_Implementation()
 void AVRPawnBase::Die()
 {
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	Dissolve();
 }
 
 void AVRPawnBase::InitAbilityActorInfo()
@@ -80,4 +81,26 @@ void AVRPawnBase::AddCharacterAbilities()
 	AuraASC->AddCharacterAbilities(StartupAbilities);
 }
 
+void AVRPawnBase::Dissolve()
+{
+	if (!DissolveMaterialInstances.IsEmpty())
+	{
+		// Get the number of materials on the mesh
+		int32 MaterialCount = GetMesh()->GetNumMaterials();
+
+		// Ensure we don't exceed the number of materials on the mesh
+		int32 InstanceCount = FMath::Min(MaterialCount, DissolveMaterialInstances.Num());
+		TArray<UMaterialInstanceDynamic*> DynamicMaterialInstances;
+
+		for (int32 i = 0; i < InstanceCount; ++i)
+		{
+			UMaterialInstanceDynamic* DynamicMatInst = UMaterialInstanceDynamic::Create(DissolveMaterialInstances[i], this);
+			GetMesh()->SetMaterial(i, DynamicMatInst);
+			DynamicMaterialInstances.Add(DynamicMatInst);
+		}
+
+		// Call the Blueprint event with the array of dynamic material instances
+		StartDissolveTimeline(DynamicMaterialInstances);
+	}
+}
 
