@@ -9,7 +9,7 @@
 
 UMMC_MaxEnergy::UMMC_MaxEnergy()
 {
-	StrDef.AttributeToCapture = UVR_AttributeSetBase::GetIntelligenceAttribute();
+	StrDef.AttributeToCapture = UVR_AttributeSetBase::GetStrengthAttribute();
 	StrDef.AttributeSource = EGameplayEffectAttributeCaptureSource::Target;
 	StrDef.bSnapshot = false;
 
