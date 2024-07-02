@@ -50,12 +50,9 @@ UAttributeMenuWidgetController* UVRAbilitySystemLibrary::GetAttributeMenuWidgetC
 
 void UVRAbilitySystemLibrary::InitializeDefaultAttributes(const UObject* WorldContextObject, ECharacterClass CharacterClass, float Level, UAbilitySystemComponent* ASC)
 {
-	AVRGameModeBase* VRGameMode = Cast<AVRGameModeBase>(UGameplayStatics::GetGameMode(WorldContextObject));
-	if (VRGameMode == nullptr) return;
-
 	AActor* AvatarActor = ASC->GetAvatarActor();
 
-	UCharacterClassInfo* CharacterClassInfo = VRGameMode->CharacterClassInfo;
+	UCharacterClassInfo* CharacterClassInfo = GetCharacterClassInfo(WorldContextObject);
 	FCharacterClassDefaultInfo ClassDefaultInfo = CharacterClassInfo->GetClassDefaultInfo(CharacterClass);
 
 	FGameplayEffectContextHandle PrimaryAttributesContextHandle = ASC->MakeEffectContext();
@@ -76,13 +73,19 @@ void UVRAbilitySystemLibrary::InitializeDefaultAttributes(const UObject* WorldCo
 
 void UVRAbilitySystemLibrary::GiveStartupAbilities(const UObject* WorldContextObject, UAbilitySystemComponent* ASC)
 {
-	AVRGameModeBase* VRGameMode = Cast<AVRGameModeBase>(UGameplayStatics::GetGameMode(WorldContextObject));
-	if (VRGameMode == nullptr) return;
+	UCharacterClassInfo* CharacterClassInfo = GetCharacterClassInfo(WorldContextObject);
 
-	UCharacterClassInfo* CharacterClassInfo = VRGameMode->CharacterClassInfo;
 	for (TSubclassOf<UGameplayAbility> AbilityClass : CharacterClassInfo->CommonAbilities)
 	{
 		FGameplayAbilitySpec AbilitySpec = FGameplayAbilitySpec(AbilityClass, 1);
 		ASC->GiveAbility(AbilitySpec);
 	}
+}
+
+UCharacterClassInfo* UVRAbilitySystemLibrary::GetCharacterClassInfo(const UObject* WorldContextObject)
+{
+	AVRGameModeBase* VRGameMode = Cast<AVRGameModeBase>(UGameplayStatics::GetGameMode(WorldContextObject));
+	if (VRGameMode == nullptr) return nullptr;
+
+	return VRGameMode->CharacterClassInfo;
 }

@@ -40,7 +40,7 @@ void UVRProjectileSpell::SpawnProjectile()
 		const FGameplayEffectSpecHandle SpecHandle = SourceASC->MakeOutgoingSpec(DamageEffectClass, GetAbilityLevel(), SourceASC->MakeEffectContext());
 		
 		const FVRGameplayTags GameplayTags = FVRGameplayTags::Get();
-		const float ScaleDamage = Damage.GetValueAtLevel(/*GetAbilityLevel()*/20.f);
+		const float ScaleDamage = Damage.GetValueAtLevel(GetAbilityLevel());
 
 		UAbilitySystemBlueprintLibrary::AssignTagSetByCallerMagnitude(SpecHandle, GameplayTags.Damage, ScaleDamage);
 		Projectile->DamageEffectSpecHandle = SpecHandle;
