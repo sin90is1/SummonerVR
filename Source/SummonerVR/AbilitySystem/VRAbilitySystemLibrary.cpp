@@ -6,6 +6,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "UI/WidgetController/VRWidgetController.h"
 #include "VRPawnBase.h"
+#include "VRAbilityTypes.h"
 
 
 UOverlayWidgetController* UVRAbilitySystemLibrary::GetOverlayWidgetController(const UObject* WorldContextObject)
@@ -88,4 +89,38 @@ UCharacterClassInfo* UVRAbilitySystemLibrary::GetCharacterClassInfo(const UObjec
 	if (VRGameMode == nullptr) return nullptr;
 
 	return VRGameMode->CharacterClassInfo;
+}
+
+bool UVRAbilitySystemLibrary::IsBlockedHit(const FGameplayEffectContextHandle& EffectContextHandle)
+{
+	if (const FVRGameplayEffectContext* VRContext = static_cast<const FVRGameplayEffectContext*>(EffectContextHandle.Get()))
+	{
+		return VRContext->IsBlockedHit();
+	}
+	return false;
+}
+
+bool UVRAbilitySystemLibrary::IsCriticalHit(const FGameplayEffectContextHandle& EffectContextHandle)
+{
+	if (const FVRGameplayEffectContext* VRContext = static_cast<const FVRGameplayEffectContext*>(EffectContextHandle.Get()))
+	{
+		return VRContext->IsCriticalHit();
+	}
+	return false;
+}
+
+void UVRAbilitySystemLibrary::SetIsBlockedHit(FGameplayEffectContextHandle& EffectContextHandle, bool bInIsBlockedHit)
+{
+	if (FVRGameplayEffectContext* VRContext = static_cast<FVRGameplayEffectContext*>(EffectContextHandle.Get()))
+	{
+		VRContext->SetIsBlockedHit(bInIsBlockedHit);
+	}
+}
+
+void UVRAbilitySystemLibrary::SetIsCriticalHit(FGameplayEffectContextHandle& EffectContextHandle, bool bInIsCriticalHit)
+{
+	if (FVRGameplayEffectContext* VRContext = static_cast<FVRGameplayEffectContext*>(EffectContextHandle.Get()))
+	{
+		VRContext->SetIsCriticalHit(bInIsCriticalHit);
+	}
 }

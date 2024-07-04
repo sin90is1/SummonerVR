@@ -10,7 +10,7 @@
 #include "UI/Widget/DamageTextComponent.h"
 
 
-void AVRPlayerController::ShowDamageNumber(float DamageAmount, ACharacter* TargetCharacter)
+void AVRPlayerController::ShowDamageNumber(float DamageAmount, ACharacter* TargetCharacter, bool bBlockedHit, bool bCriticalHit)
 {
 	if (IsValid(TargetCharacter) && DamageTextComponentClass)
 	{
@@ -18,7 +18,7 @@ void AVRPlayerController::ShowDamageNumber(float DamageAmount, ACharacter* Targe
 		DamageText->RegisterComponent();
 		DamageText->AttachToComponent(TargetCharacter->GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
 		DamageText->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
-		DamageText->SetDamageText(DamageAmount);
+		DamageText->SetDamageText(DamageAmount, bBlockedHit, bCriticalHit);
 	}
 }
 

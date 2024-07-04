@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "GameplayEffectExtension.h"
 #include "VRGameplayTags.h"
+#include "AbilitySystem/VRAbilitySystemLibrary.h"
 #include "Interaction/CombatInterface.h"
 #include "Kismet/GameplayStatics.h"
 #include "VRPlayerController.h"
@@ -91,13 +92,13 @@ void UVR_AttributeSetBase::SetEffectProperties(const FGameplayEffectModCallbackD
 	}
 }
 
-void UVR_AttributeSetBase::ShowFloatingText(const FEffectProperties& Props, float Damage) const
+void UVR_AttributeSetBase::ShowFloatingText(const FEffectProperties& Props, float Damage, bool bBlockedHit, bool bCriticalHit) const
 {
 	if (Props.SourceCharacter != Props.TargetCharacter)
 	{
 		if (AVRPlayerController* PC = Cast<AVRPlayerController>(UGameplayStatics::GetPlayerController(Props.SourceCharacter, 0)))
 		{
-			PC->ShowDamageNumber(Damage, Props.TargetCharacter);
+			PC->ShowDamageNumber(Damage, Props.TargetCharacter, bBlockedHit, bCriticalHit);
 		}
 	}
 }
@@ -146,7 +147,10 @@ void UVR_AttributeSetBase::PostGameplayEffectExecute(const struct FGameplayEffec
 				Props.TargetASC->TryActivateAbilitiesByTag(TagContainer);
 			}
 
-			ShowFloatingText(Props, LocalIncomingDamage);
+			const bool bBlock = UVRAbilitySystemLibrary::IsBlockedHit(Props.EffectContextHandle);
+			const bool bCriticalHit = UVRAbilitySystemLibrary::IsCriticalHit(Props.EffectContextHandle);
+
+			ShowFloatingText(Props, LocalIncomingDamage, bBlock, bCriticalHit);
 		}
 	}
 }

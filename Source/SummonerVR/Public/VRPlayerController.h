@@ -20,7 +20,7 @@ class SUMMONERVR_API AVRPlayerController : public APlayerController
 
 public:
 		UFUNCTION()
-	void ShowDamageNumber(float DamageAmount, ACharacter* TargetCharacter);
+	void ShowDamageNumber(float DamageAmount, ACharacter* TargetCharacter, bool bBlockedHit, bool bCriticalHit);
 protected:
 
 	virtual void SetupInputComponent() override;
