@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AbilitySystem/Abilities/VRGameplayAbility.h"
+#include "AbilitySystem/Abilities/VRDamageGameplayAbility.h"
 #include "VRProjectileSpell.generated.h"
 
 
@@ -13,7 +13,7 @@ class UGameplayEffect;
  * 
  */
 UCLASS()
-class SUMMONERVR_API UVRProjectileSpell : public UVRGameplayAbility
+class SUMMONERVR_API UVRProjectileSpell : public UVRDamageGameplayAbility
 {
 	GENERATED_BODY()
 
@@ -26,8 +26,5 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<AVRProjectile> ProjectileClass;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TSubclassOf<UGameplayEffect> DamageEffectClass;
 
 };
