@@ -123,7 +123,7 @@ void AEnemyCharacterBase::Die()
 	GetMesh()->SetSimulatePhysics(true);
 	GetMesh()->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
 	GetMesh()->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Block);
-
+	HealthBar->DestroyComponent();
 	Super::Die();
 
 }
