@@ -81,6 +81,10 @@ protected:
 
 // 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 // 	TObjectPtr<UMaterialInstance> LowHpMaterialInstance;
+
+// 	UFUNCTION(BlueprintCallable)
+// 	TArray<TSubclassOf<UGameplayAbility>> GetStartupAbilities();
+
 private:
 
 	UPROPERTY(EditAnywhere, Category = "Abilities")

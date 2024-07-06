@@ -29,6 +29,15 @@ public:
 	void AbilityInputTagHeld(const FGameplayTag& InputTag);
 	void AbilityInputTagReleased(const FGameplayTag& InputTag);
 
+	static FGameplayTag GetInputTagFromSpec(const FGameplayAbilitySpec& AbilitySpec);
+	FGameplayAbilitySpec* GetSpecFromAbilityTag(const FGameplayTag& AbilityTag);
+
+	void ClearTagFromSpec(FGameplayAbilitySpec* Spec);
+	void ClearAbilitiesOfInputTag(const FGameplayTag& InputTag);
+
+	UFUNCTION(BlueprintCallable, Category = "Abilities")
+	void SetAbilityForInput(const FGameplayTag& AbilityTag, const FGameplayTag& InputTag);
+
 protected:
 
 	void EffectApplied(UAbilitySystemComponent* AbilitySystemComponent, const FGameplayEffectSpec& EffectSpec, FActiveGameplayEffectHandle ActiveEffectHandle);

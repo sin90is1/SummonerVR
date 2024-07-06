@@ -96,3 +96,8 @@ void AVRPawnBase::Dissolve()
 	}
 }
 
+// TArray<TSubclassOf<UGameplayAbility>> AVRPawnBase::GetStartupAbilities()
+// {
+// 	return StartupAbilities;
+// }
+
