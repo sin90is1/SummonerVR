@@ -41,5 +41,11 @@ protected:
 	virtual FRotator GetCombatSocketRotation() override;
 	
 	UFUNCTION(BlueprintCallable, Category = "Combat")
+	 FVector BP_GetCombatSocketLocation();
+	 UFUNCTION(BlueprintCallable, Category = "Combat")
+	 FRotator BP_GetCombatSocketRotation();
+
+	UFUNCTION(BlueprintCallable, Category = "Combat")
 	void BP_SetWeapon(USkeletalMeshComponent* Weapon);
+
 };

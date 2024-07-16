@@ -12,7 +12,7 @@ void UVR_AbilitySystemComponentBase::AbilityActorInfoSet()
 
 void UVR_AbilitySystemComponentBase::AddCharacterAbilities(const TArray<TSubclassOf<UGameplayAbility>>& StartupAbilities)
 {
-	for (const TSubclassOf<UGameplayAbility> AbilityClass : StartupAbilities)
+	for (const TSubclassOf<UGameplayAbility>& AbilityClass : StartupAbilities)
 	{
 		FGameplayAbilitySpec AbilitySpec = FGameplayAbilitySpec(AbilityClass, 1);
 		if (const UVRGameplayAbility* VRAbility = Cast<UVRGameplayAbility>(AbilitySpec.Ability))
