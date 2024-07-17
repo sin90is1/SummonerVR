@@ -12,6 +12,8 @@
 
 class UCapsuleComponent;
 class UWidgetComponent;
+class UBehaviorTree;
+class AVRAIController;
 
 UCLASS()
 class SUMMONERVR_API AEnemyCharacterBase : public AVRPawnBase
@@ -21,6 +23,8 @@ class SUMMONERVR_API AEnemyCharacterBase : public AVRPawnBase
 public:
 	// Sets default values for this character's properties
 	AEnemyCharacterBase();
+
+	virtual void PossessedBy(AController* NewController) override;
 
 protected:
 
@@ -76,5 +80,11 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UWidgetComponent> HealthBar;
-		
+
+	UPROPERTY(EditAnywhere, Category = "AI")
+	TObjectPtr<UBehaviorTree> BehaviorTree;
+
+	UPROPERTY()
+	TObjectPtr<AVRAIController> VRAIController;
+
 };

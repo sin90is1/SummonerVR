@@ -10,7 +10,7 @@ public class SummonerVR : ModuleRules
 	
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "GameplayAbilities" });
 
-		PrivateDependencyModuleNames.AddRange(new string[] { "GameplayTags", "GameplayTasks", "Niagara" });
+		PrivateDependencyModuleNames.AddRange(new string[] { "GameplayTags", "GameplayTasks", "Niagara", "AIModule" });
 
 		PublicIncludePaths.Add("SummonerVR/");
 

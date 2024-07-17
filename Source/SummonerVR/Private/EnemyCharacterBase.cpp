@@ -12,6 +12,9 @@
 #include "Components/WidgetComponent.h"
 #include "UI/Widget/VRUserWidget.h"
 #include "VRGameplayTags.h"
+#include "AI/VRAIController.h"
+#include "BehaviorTree/BehaviorTree.h"
+#include "BehaviorTree/BlackboardComponent.h"
 
 
 //Sets default values
@@ -36,6 +39,17 @@ AEnemyCharacterBase::AEnemyCharacterBase()
 	HealthBar = CreateDefaultSubobject<UWidgetComponent>("HealthBar");
 	HealthBar->SetupAttachment(GetRootComponent());
 
+}
+
+void AEnemyCharacterBase::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	if (!HasAuthority()) return;
+
+	VRAIController = Cast<AVRAIController>(NewController);
+	VRAIController->GetBlackboardComponent()->InitializeBlackboard(*BehaviorTree->BlackboardAsset);
+	VRAIController->RunBehaviorTree(BehaviorTree);
 }
 
 // Called when the game starts or when spawned
