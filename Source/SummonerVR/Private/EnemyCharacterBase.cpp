@@ -39,6 +39,10 @@ AEnemyCharacterBase::AEnemyCharacterBase()
 	HealthBar = CreateDefaultSubobject<UWidgetComponent>("HealthBar");
 	HealthBar->SetupAttachment(GetRootComponent());
 
+	bUseControllerRotationPitch = false;
+	bUseControllerRotationRoll = false;
+	bUseControllerRotationYaw = false;
+	GetCharacterMovement()->bUseControllerDesiredRotation = true;
 }
 
 void AEnemyCharacterBase::PossessedBy(AController* NewController)
@@ -50,6 +54,9 @@ void AEnemyCharacterBase::PossessedBy(AController* NewController)
 	VRAIController = Cast<AVRAIController>(NewController);
 	VRAIController->GetBlackboardComponent()->InitializeBlackboard(*BehaviorTree->BlackboardAsset);
 	VRAIController->RunBehaviorTree(BehaviorTree);
+	VRAIController->GetBlackboardComponent()->SetValueAsBool(FName("HitReacting"), false);
+	VRAIController->GetBlackboardComponent()->SetValueAsBool(FName("RangedAttacker"), CharacterClass != ECharacterClass::Warrior);
+
 }
 
 // Called when the game starts or when spawned
@@ -146,4 +153,5 @@ void AEnemyCharacterBase::HitReactTagChanged(const FGameplayTag CallBackTag, int
 {
 	bHitReacting = NewCount > 0;
 	GetCharacterMovement()->MaxWalkSpeed = bHitReacting ? 0.f : BaseWalkSpeed;
+	VRAIController->GetBlackboardComponent()->SetValueAsBool(FName("HitReacting"), bHitReacting);
 }
