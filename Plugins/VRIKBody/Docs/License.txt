@@ -1,0 +1,9 @@
+License
+
+Licensor: Yuri N Kalinin, Moscow, Russia
+
+Licensor grants to the END-USER a non-exclusive, worldwide, and perpetual license to the VR IK Body Plugin (Plugin) to integrate it as incorporated and embedded component of electronic games and interactive media and distribute such electronic game and interactive media as a commercial product. END-USER may not reproduce, distribute, sublicense, rent, lease or lend the Plugin. END-USER can not re-sell the Plugin to other people. END-USER can not share the cost of purchasing with other people and then let them use the Plugin.
+Contacts
+
+e-mail: ykasczc@gmail.com
+web: antiantigame.ru
