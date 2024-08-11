@@ -65,7 +65,7 @@ void AEnemyCharacterBase::BeginPlay()
 	Super::BeginPlay();
 	GetCharacterMovement()->MaxWalkSpeed = BaseWalkSpeed;
 	InitAbilityActorInfo();
-	UVRAbilitySystemLibrary::GiveStartupAbilities(this, AbilitySystemComponent);
+	UVRAbilitySystemLibrary::GiveStartupAbilities(this, AbilitySystemComponent, CharacterClass);
 
 
 	if (UVRUserWidget* VRUserWidget = Cast<UVRUserWidget>(HealthBar->GetUserWidgetObject()))
