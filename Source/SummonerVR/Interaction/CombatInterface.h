@@ -28,6 +28,9 @@ public:
 	virtual FVector GetCombatSocketLocation();
 	virtual FRotator GetCombatSocketRotation();
 
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	void UpdateFacingTarget(const FVector& Target);
+
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	UAnimMontage* GetHitReactMontage();
 

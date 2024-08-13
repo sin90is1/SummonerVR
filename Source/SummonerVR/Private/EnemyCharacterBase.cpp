@@ -149,6 +149,16 @@ void AEnemyCharacterBase::Die()
 
 }
 
+AActor* AEnemyCharacterBase::GetCombatTarget_Implementation() const
+{
+	return CombatTarget;
+}
+
+void AEnemyCharacterBase::SetCombatTarget_Implementation(AActor* InCombatTarget)
+{
+	CombatTarget = InCombatTarget;
+}
+
 void AEnemyCharacterBase::HitReactTagChanged(const FGameplayTag CallBackTag, int32 NewCount)
 {
 	bHitReacting = NewCount > 0;

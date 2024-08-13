@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Interaction/EnemyInterface.h"
 #include "UI/WidgetController/OverlayWidgetController.h"
 #include "AbilitySystem/Data/CharacterClassInfo.h"
 #include "VRPawnBase.h"
@@ -16,7 +17,7 @@ class UBehaviorTree;
 class AVRAIController;
 
 UCLASS()
-class SUMMONERVR_API AEnemyCharacterBase : public AVRPawnBase
+class SUMMONERVR_API AEnemyCharacterBase : public AVRPawnBase, public IEnemyInterface
 {
 	GENERATED_BODY()
 
@@ -52,6 +53,9 @@ public:
 	/** Combat Interface */
 	virtual int32 GetPlayerLevel() override;
 	virtual void Die() override;
+	virtual void SetCombatTarget_Implementation(AActor* InCombatTarget) override;
+	virtual AActor* GetCombatTarget_Implementation() const override;
+
 	/** end Combat Interface */
 
 	UPROPERTY(BlueprintAssignable)
@@ -70,6 +74,9 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combat")
 	float LifeSpan = 5.f;
+
+	UPROPERTY(BlueprintReadWrite, Category = "Combat")
+	TObjectPtr<AActor> CombatTarget;
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Character Class Defaults")

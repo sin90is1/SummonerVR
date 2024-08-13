@@ -95,6 +95,10 @@
 			"Name": "VRIKBody",
 			"Enabled": true,
 			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/content/c7314be54a7d49939c2dabc13fe1ffff"
+		},
+		{
+			"Name": "MotionWarping",
+			"Enabled": true
 		}
 	],
 	"TargetPlatforms": [
