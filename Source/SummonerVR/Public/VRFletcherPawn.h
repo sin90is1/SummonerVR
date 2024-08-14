@@ -27,25 +27,5 @@ private:
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Character Class Defaults")
 	int32 Level = 1;
-	
-	/* Maybe change it in future because of repetition */
-
-	/*Right hand*/
-	UPROPERTY(EditAnywhere, Category = "Combat")
-	TObjectPtr<USkeletalMeshComponent> WeaponToUse;
-
-	UPROPERTY(EditAnywhere, Category = "Combat")
-	FName WeaponTipSocketName;
-
-	virtual FVector GetCombatSocketLocation() override;
-	virtual FRotator GetCombatSocketRotation() override;
-	
-	UFUNCTION(BlueprintCallable, Category = "Combat")
-	 FVector BP_GetCombatSocketLocation();
-	 UFUNCTION(BlueprintCallable, Category = "Combat")
-	 FRotator BP_GetCombatSocketRotation();
-
-	UFUNCTION(BlueprintCallable, Category = "Combat")
-	void BP_SetWeapon(USkeletalMeshComponent* Weapon);
 
 };

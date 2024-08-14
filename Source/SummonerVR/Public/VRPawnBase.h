@@ -79,11 +79,19 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TArray<TObjectPtr<UMaterialInstance>> DissolveMaterialInstances;
 
-// 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-// 	TObjectPtr<UMaterialInstance> LowHpMaterialInstance;
+protected:
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	TObjectPtr<USkeletalMeshComponent> WeaponToUse;
 
-// 	UFUNCTION(BlueprintCallable)
-// 	TArray<TSubclassOf<UGameplayAbility>> GetStartupAbilities();
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	FName WeaponTipSocketName;
+
+	virtual FVector GetCombatSocketLocation_Implementation() override;
+
+	virtual FRotator GetCombatSocketRotation_Implementation() override;
+
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+	void BP_SetWeapon(USkeletalMeshComponent* Weapon);
 
 private:
 

@@ -40,11 +40,6 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void InitAbilityActorInfo() override;
 	virtual void InitializeDefaultAttributes() const override;
-	virtual FVector GetCombatSocketLocation() override;
-	virtual FRotator GetCombatSocketRotation() override;
-
-	UPROPERTY(EditAnywhere, Category = "Combat")
-	FName WeaponTipSocketName;
 
 public:	
 

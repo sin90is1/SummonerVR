@@ -34,33 +34,3 @@ void AVRFletcherPawn::InitAbilityActorInfo()
 	Cast<UVR_AbilitySystemComponentBase>(AbilitySystemComponent)->AbilityActorInfoSet();
 	InitializeDefaultAttributes();
 };
-
-//it works an it is flexible but I think I could Improve it a little in future 
-FVector AVRFletcherPawn::GetCombatSocketLocation()
-{
-  	check(WeaponToUse)
-	return WeaponToUse->GetSocketLocation(WeaponTipSocketName);
-}
-
-
-FRotator AVRFletcherPawn::GetCombatSocketRotation()
-{
-	check(WeaponToUse)
-	return WeaponToUse->GetSocketRotation(WeaponTipSocketName);
-}
-
-FVector AVRFletcherPawn::BP_GetCombatSocketLocation()
-{
-	return GetCombatSocketLocation();
-}
-
-FRotator AVRFletcherPawn::BP_GetCombatSocketRotation()
-{
-	return GetCombatSocketRotation();
-}
-
-void AVRFletcherPawn::BP_SetWeapon(USkeletalMeshComponent* Weapon)
-{
-	WeaponToUse = Weapon;
-}
-

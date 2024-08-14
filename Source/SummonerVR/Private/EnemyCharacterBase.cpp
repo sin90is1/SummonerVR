@@ -112,17 +112,6 @@ void AEnemyCharacterBase::InitializeDefaultAttributes() const
 	UVRAbilitySystemLibrary::InitializeDefaultAttributes(this, CharacterClass, Level, AbilitySystemComponent);
 }
 
-FVector AEnemyCharacterBase::GetCombatSocketLocation()
-{
-	check(GetMesh());
-	return GetMesh()->GetSocketLocation(WeaponTipSocketName);
-}
-
-FRotator AEnemyCharacterBase::GetCombatSocketRotation()
-{
-	check(GetMesh())
-	return GetMesh()->GetSocketRotation(WeaponTipSocketName);
-}
 
 // Called every frame
 void AEnemyCharacterBase::Tick(float DeltaTime)

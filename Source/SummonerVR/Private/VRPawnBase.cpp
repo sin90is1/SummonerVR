@@ -96,6 +96,23 @@ void AVRPawnBase::Dissolve()
 	}
 }
 
+void AVRPawnBase::BP_SetWeapon(USkeletalMeshComponent* Weapon)
+{
+	WeaponToUse = Weapon;
+}
+
+FRotator AVRPawnBase::GetCombatSocketRotation_Implementation()
+{
+	check(WeaponToUse);
+	return WeaponToUse->GetSocketRotation(WeaponTipSocketName);
+}
+
+FVector AVRPawnBase::GetCombatSocketLocation_Implementation()
+{
+	check(WeaponToUse);
+	return WeaponToUse->GetSocketLocation(WeaponTipSocketName);
+}
+
 // TArray<TSubclassOf<UGameplayAbility>> AVRPawnBase::GetStartupAbilities()
 // {
 // 	return StartupAbilities;
