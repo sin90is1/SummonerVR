@@ -42,6 +42,17 @@ void AVRPawnBase::Die()
 {
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	Dissolve();
+	bDead = true;
+}
+
+AActor* AVRPawnBase::GetAvatar_Implementation()
+{
+	return this;
+}
+
+bool AVRPawnBase::IsDead_Implementation() const
+{
+	return bDead;
 }
 
 void AVRPawnBase::InitAbilityActorInfo()

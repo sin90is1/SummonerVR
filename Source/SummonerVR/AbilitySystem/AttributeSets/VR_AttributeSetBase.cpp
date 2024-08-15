@@ -103,6 +103,11 @@ void UVR_AttributeSetBase::ShowFloatingText(const FEffectProperties& Props, floa
 		if (AVRPlayerController* PC = Cast<AVRPlayerController>(Props.SourceCharacter->Controller))
 		{
 			PC->ShowDamageNumber(Damage, Props.TargetCharacter, bBlockedHit, bCriticalHit);
+			return;
+		}
+		if (AVRPlayerController* PC = Cast<AVRPlayerController>(Props.TargetCharacter->Controller))
+		{
+			PC->ShowDamageNumber(Damage, Props.TargetCharacter, bBlockedHit, bCriticalHit);
 		}
 	}
 }

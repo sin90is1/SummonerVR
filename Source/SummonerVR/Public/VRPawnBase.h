@@ -43,9 +43,15 @@ public:
     UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Widget")
     AWidgetContainerActor* WidgetContainerActor;
 
+	/** Combat Interface */
+
 	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
 	virtual void Die() override;
-
+	virtual FVector GetCombatSocketLocation_Implementation() override;
+	virtual FRotator GetCombatSocketRotation_Implementation() override;
+	virtual bool IsDead_Implementation() const override;
+	virtual AActor* GetAvatar_Implementation() override;
+	/** End Combat Interface */
 protected:
 
 	UPROPERTY(BlueprintReadOnly)
@@ -80,15 +86,13 @@ protected:
 	TArray<TObjectPtr<UMaterialInstance>> DissolveMaterialInstances;
 
 protected:
+	bool bDead = false;
+
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	TObjectPtr<USkeletalMeshComponent> WeaponToUse;
 
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	FName WeaponTipSocketName;
-
-	virtual FVector GetCombatSocketLocation_Implementation() override;
-
-	virtual FRotator GetCombatSocketRotation_Implementation() override;
 
 	UFUNCTION(BlueprintCallable, Category = "Combat")
 	void BP_SetWeapon(USkeletalMeshComponent* Weapon);

@@ -152,5 +152,8 @@ void AEnemyCharacterBase::HitReactTagChanged(const FGameplayTag CallBackTag, int
 {
 	bHitReacting = NewCount > 0;
 	GetCharacterMovement()->MaxWalkSpeed = bHitReacting ? 0.f : BaseWalkSpeed;
-	VRAIController->GetBlackboardComponent()->SetValueAsBool(FName("HitReacting"), bHitReacting);
+	if (VRAIController && VRAIController->GetBlackboardComponent())
+	{
+		VRAIController->GetBlackboardComponent()->SetValueAsBool(FName("HitReacting"), bHitReacting);
+	}
 }
