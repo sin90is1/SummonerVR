@@ -6,6 +6,7 @@
 #include "AbilitySystem/Components/VR_AbilitySystemComponentBase.h"
 #include "AbilitySystem/AttributeSets/VR_AttributeSetBase.h"
 #include "AbilitySystem/Components/VR_AbilitySystemComponentBase.h"
+#include "VRGameplayTags.h"
 #include "Components/CapsuleComponent.h"
 
 // Sets default values
@@ -43,6 +44,11 @@ void AVRPawnBase::Die()
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	Dissolve();
 	bDead = true;
+}
+
+TArray<FTaggedMontage> AVRPawnBase::GetAttackMontages_Implementation()
+{
+	return AttackMontages;
 }
 
 AActor* AVRPawnBase::GetAvatar_Implementation()
@@ -112,16 +118,40 @@ void AVRPawnBase::BP_SetWeapon(USkeletalMeshComponent* Weapon)
 	WeaponToUse = Weapon;
 }
 
-FRotator AVRPawnBase::GetCombatSocketRotation_Implementation()
+FRotator AVRPawnBase::GetCombatSocketRotation_Implementation(const FGameplayTag& MontageTag)
 {
-	check(WeaponToUse);
-	return WeaponToUse->GetSocketRotation(WeaponTipSocketName);
+	const FVRGameplayTags& GameplayTags = FVRGameplayTags::Get();
+	if (MontageTag.MatchesTagExact(GameplayTags.Montage_Attack_RightHand))
+	{
+		return GetMesh()->GetSocketRotation(RightHandSocketName);
+	}
+	if (MontageTag.MatchesTagExact(GameplayTags.Montage_Attack_LeftHand))
+	{
+		return GetMesh()->GetSocketRotation(LeftHandSocketName);
+	}
+	if (MontageTag.MatchesTagExact(GameplayTags.Montage_Attack_Weapon) && IsValid(WeaponToUse))
+	{
+		return WeaponToUse->GetSocketRotation(WeaponTipSocketName);
+	}
+	return FRotator();
 }
 
-FVector AVRPawnBase::GetCombatSocketLocation_Implementation()
+FVector AVRPawnBase::GetCombatSocketLocation_Implementation(const FGameplayTag& MontageTag)
 {
-	check(WeaponToUse);
-	return WeaponToUse->GetSocketLocation(WeaponTipSocketName);
+	const FVRGameplayTags& GameplayTags = FVRGameplayTags::Get();
+	if (MontageTag.MatchesTagExact(GameplayTags.Montage_Attack_RightHand))
+	{
+		return GetMesh()->GetSocketLocation(RightHandSocketName);
+	}
+	if (MontageTag.MatchesTagExact(GameplayTags.Montage_Attack_LeftHand))
+	{
+		return GetMesh()->GetSocketLocation(LeftHandSocketName);
+	}
+	if (MontageTag.MatchesTagExact(GameplayTags.Montage_Attack_Weapon) && IsValid(WeaponToUse))
+	{
+		return WeaponToUse->GetSocketLocation(WeaponTipSocketName);
+	}
+	return FVector();
 }
 
 // TArray<TSubclassOf<UGameplayAbility>> AVRPawnBase::GetStartupAbilities()

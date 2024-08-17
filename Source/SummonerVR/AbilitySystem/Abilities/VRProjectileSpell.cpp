@@ -18,8 +18,13 @@ void UVRProjectileSpell::ActivateAbility(const FGameplayAbilitySpecHandle Handle
 
 void UVRProjectileSpell::SpawnProjectile()
 {
-	const FVector SocketLocation = ICombatInterface::Execute_GetCombatSocketLocation(GetAvatarActorFromActorInfo());
-	const FRotator SocketRotation = ICombatInterface::Execute_GetCombatSocketRotation(GetAvatarActorFromActorInfo());
+	const FVector SocketLocation = ICombatInterface::Execute_GetCombatSocketLocation(
+		GetAvatarActorFromActorInfo(),
+		FVRGameplayTags::Get().Montage_Attack_RightHand);
+
+	const FRotator SocketRotation = ICombatInterface::Execute_GetCombatSocketRotation(
+		GetAvatarActorFromActorInfo(),
+		FVRGameplayTags::Get().Montage_Attack_RightHand);
 
 	FTransform SpawnTransform;
 	SpawnTransform.SetLocation(SocketLocation);
