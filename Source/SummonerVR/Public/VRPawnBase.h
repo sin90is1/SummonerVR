@@ -47,8 +47,10 @@ public:
 
 	virtual UAnimMontage* GetHitReactMontage_Implementation() override;
 	virtual void Die() override;
+	virtual FName GetCombatSocketName_Implementation(const FGameplayTag& MontageTag) override;
 	virtual FVector GetCombatSocketLocation_Implementation(const FGameplayTag& MontageTag) override;
 	virtual FRotator GetCombatSocketRotation_Implementation(const FGameplayTag& MontageTag) override;
+	virtual USkeletalMeshComponent* GetCombatMesh_Implementation() const override;
 	virtual bool IsDead_Implementation() const override;
 	virtual AActor* GetAvatar_Implementation() override;
 	virtual TArray<FTaggedMontage> GetAttackMontages_Implementation() override;

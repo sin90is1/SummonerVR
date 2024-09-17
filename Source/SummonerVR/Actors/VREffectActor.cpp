@@ -27,7 +27,7 @@ void AVREffectActor::BP_ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGa
 {
 
 	if (TargetActor->ActorHasTag(FName("Enemy")) && !bApplyEffectToEnemies) return;
-	
+	 
 
 	//0.best way to get ASC
 	UAbilitySystemComponent* TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(TargetActor);

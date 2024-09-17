@@ -46,6 +46,30 @@ void AVRPawnBase::Die()
 	bDead = true;
 }
 
+USkeletalMeshComponent* AVRPawnBase::GetCombatMesh_Implementation() const
+{
+	return GetMesh();
+}
+
+FName AVRPawnBase::GetCombatSocketName_Implementation(const FGameplayTag& MontageTag)
+{
+
+	const FVRGameplayTags& GameplayTags = FVRGameplayTags::Get();
+	if (MontageTag.MatchesTagExact(GameplayTags.Montage_Attack_RightHand))
+	{
+		return RightHandSocketName;
+	}
+	if (MontageTag.MatchesTagExact(GameplayTags.Montage_Attack_LeftHand))
+	{
+		return LeftHandSocketName;
+	}
+	if (MontageTag.MatchesTagExact(GameplayTags.Montage_Attack_Weapon) && IsValid(WeaponToUse))
+	{
+		return WeaponTipSocketName;
+	}
+	return FName();
+}
+
 TArray<FTaggedMontage> AVRPawnBase::GetAttackMontages_Implementation()
 {
 	return AttackMontages;
