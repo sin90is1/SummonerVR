@@ -33,7 +33,7 @@ void AVRPlayerController::SetupInputComponent()
 
 void AVRPlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 {
-	//GEngine->AddOnScreenDebugMessage(1, 3.f, FColor::Red, *InputTag.ToString());
+	if (GetASC()) GetASC()->AbilityInputTagPressed(InputTag);
 }
 
 

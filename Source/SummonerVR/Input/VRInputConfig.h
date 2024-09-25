@@ -33,6 +33,7 @@ class SUMMONERVR_API UVRInputConfig : public UDataAsset
 
 	const UInputAction* FindAbilityInputActionForTag(const FGameplayTag& InputTag, bool bLogNotFound = false) const;
 
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TArray<FVRInputAction> AbilityInputActions;
 };
