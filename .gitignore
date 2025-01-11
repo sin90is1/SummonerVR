@@ -72,3 +72,6 @@ Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+Content/Characters/MetaHumen/Fletcher/FletcherBodyfbx.uasset
+Content/MetaHumans/Common/Face/Face_Archetype.uasset
+Content/MetaHumans/Fletcher/Face/Fletcher_FaceMesh.uasset
