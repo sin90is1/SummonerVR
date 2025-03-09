@@ -47,7 +47,7 @@ This is an RPG VR game developed in Unreal Engine 5 for the Meta Quest 3, utiliz
   - Floating text for **critical hits**, **blocked hits**, and **critical blocked hits**.
 
 ## Plugins Used
-- **miVRy Plugin** - Gesture recognition for magic casting.
+- [**miVRy Plugin**](https://www.marui-plugin.com/mivry/) - Gesture recognition for magic casting.
 - **VRIKBody Plugin** - Full-body Metahuman VR animation.
 - **Gameplay Ability System (GAS)** - Ability management framework.
 
