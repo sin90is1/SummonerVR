@@ -5,7 +5,7 @@
 ## Overview
 This is an RPG VR game developed in Unreal Engine 5 for the Meta Quest 3, utilizing the **Gameplay Ability System (GAS)** for ability management and **miVRy Plugin** for gesture-based spellcasting. The game is inspired by the *Summoner* book series by **Taran Matharu** and modifies concepts from the course *Unreal Engine 5 - Gameplay Ability System - Top Down RPG*, adapting them for VR.
 
-[**ShowCase video on LinkedIn**](https://www.linkedin.com/posts/sina-ghavami-adel-b1b92a1b2_unrealengine-vr-gamedev-activity-7223099014227922944-L6qw?utm_source=share&utm_medium=member_desktop&rcm=ACoAADGdd8cBudtM0EOoOoqx5HHzuUlMiM9gU4A) 
+[**ShowCase video on LinkedIn**](https://www.linkedin.com/posts/sina-ghavami-adel-b1b92a1b2_exciting-progress-on-my-rpg-vr-project-activity-7245514854306840576-tC24?utm_source=share&utm_medium=member_desktop&rcm=ACoAADGdd8cBudtM0EOoOoqx5HHzuUlMiM9gU4A) 
 
 
 ## Features
